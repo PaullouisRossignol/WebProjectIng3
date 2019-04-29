@@ -20,19 +20,19 @@
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Loging Box" />
+                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Connection" />
             </div>
 
             <!-- Login Form -->
             <form action="Connection.php" method="POST">
-                <input type="text" id="login" class="fadeIn second" name="email" placeholder="email">
-                <input type="text" id="password" class="fadeIn third" name="pwd" placeholder="password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email">
+                <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="password">
+                <input type="submit" class="fadeIn fourth" value="Se connecter">
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="#">Pas encore de compte?</a>
+                <a class="underlineHover" href="creerCompte.html">Pas encore de compte?</a>
             </div>
 
         </div>
