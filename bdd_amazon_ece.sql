@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 29 avr. 2019 à 15:09
+-- Généré le :  lun. 29 avr. 2019 à 15:19
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `bank_info` (
   `City` varchar(255) NOT NULL,
   `Sec_code` int(11) NOT NULL,
   `Country` varchar(255) NOT NULL,
-  `Phone_number` int(11) NOT NULL,
+  `Phone_number` varchar(255) NOT NULL,
   PRIMARY KEY (`Card_num`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `bank_info` (
 --
 
 INSERT INTO `bank_info` (`Card_num`, `Type`, `Name_card`, `Exp_date`, `PostCode`, `Adr_1`, `Adr_2`, `City`, `Sec_code`, `Country`, `Phone_number`) VALUES
-('123456789', 'Visa', 'MR PIERRE CAMUGLI', '2019-04-17', 92150, '33 rue du docteur magnan', '...', 'Suresnes', 123, 'France', 606060606);
+('123456789', 'Visa', 'MR PIERRE CAMUGLI', '2019-04-17', 92150, '33 rue du docteur magnan', '...', 'Suresnes', 123, 'France', '0650367245');
 
 -- --------------------------------------------------------
 
