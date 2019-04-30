@@ -19,33 +19,48 @@
 </head>
 
 <body>
-        <div class="container">
+<div class="container">
                 <div class="main">
                     <div class="main-center">
                     <h3 style="text-align: center">Inscrivez-vous pour avoir accès à toute notre gamme de produits !</h3>
-                        <form class="" method="post" action="#">
+                        <form enctype="multipart/form-data" method="POST" action="creationCompte.php">
                             
                             <div class="form-group">
                                 <label for="name"> Email</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                    <input type="email" class="form-control" name="email" id="name"  placeholder="Entrer votre email"/>
+                    <input type="email" class="form-control" name="email" id="name"  placeholder="Entrer votre email"required />
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email"> Photo de profil</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                        <input style="font-size: 14px"  accept="image/*" type="file" id="photo" name="photo" required />
+                                    </div>
                             </div>
     
                             <div class="form-group">
                                 <label for="email"> Mot de passe</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                        <input type="password" class="form-control" name="pwd" placeholder="Entrer votre mot de passe"/>
+                                        <input type="password" class="form-control" name="pwd" placeholder="Entrer votre mot de passe"required />
                                 </div>
                             </div>
     
                             <div class="form-group">
-                                <label for="username">Prenom & Nom</label>
+                                <label for="username">Prenom</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="prenomNom" placeholder="Prenom & Nom"/>
+                                        <input type="text" class="form-control" name="prenom" placeholder="Prenom"required />
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Nom</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="nom" placeholder="Nom"required />
                                     </div>
                             </div>
                             <h4>Adresse de livraison</h4>
@@ -53,7 +68,7 @@
                                 <label for="password">Adresse</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="adr1" placeholder="Ligne Adresse 1"/>
+                                        <input type="text" class="form-control" name="adr1" placeholder="Ligne Adresse 1"required />
                                     </div>
                                     <br>
                                     <div class="input-group">
@@ -66,7 +81,7 @@
                                 <label for="password">Ville</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="ville" placeholder="Ville"/>
+                                        <input type="text" class="form-control" name="ville" placeholder="Ville"required />
                                     </div>
                                     <br>
                                     
@@ -75,7 +90,7 @@
                                 <label for="password">Code Postal</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="codePost" placeholder="Code Postal"/>
+                                        <input type="text" class="form-control" name="codePost" placeholder="Code Postal"required />
                                     </div>
                                     <br>
                                     
@@ -84,7 +99,7 @@
                                 <label for="password">Pays</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="codePost" placeholder="Pays"/>
+                                        <input type="text" class="form-control" name="Pays" placeholder="Pays"required />
                                     </div>
                                     <br>
                                     
@@ -93,7 +108,7 @@
                                 <label for="password">Numéro de téléphone</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <input type="text" class="form-control" name="phone" placeholder="téléphone"/>
+                                        <input type="text" class="form-control" name="phone" placeholder="téléphone"required />
                                     </div>
                                     <br>
                                     
@@ -103,17 +118,53 @@
                                 <label for="password">Type de carte de crédit</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <select name="carlist" form="carform">
-                                            <option value="volvo">Visa</option>
-                                            <option value="saab">Master Card</option>
-                                            <option value="opel">American Express</option>
+                                        <select name="TypeCard" >
+                                            <option value="Visa">Visa</option>
+                                            <option value="Master Card">Master Card</option>
+                                            <option value="American Express">American Express</option>
                                         </select>
                                     </div>
                                     <br>
                                     
                             </div>
+                            <div class="form-group">
+                                <label for="password">Numéro de carte</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="numCard" placeholder="Numéro de carte"required />
+                                    </div>
+                                    <br>
+                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Nom du propriétaire</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="nameCard" placeholder="Nom du propriétaire"required />
+                                    </div>
+                                    <br>
+                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Date d'expiration</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        <input style="font-size:13px; color:lightslategray" type="date" class="form-control" name="dateExp" placeholder="Date d'expiration"required />
+                                    </div>
+                                    <br>
+                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Code de sécurité</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                        <input type="text" class="form-control" name="codeSec" placeholder="Code de sécurité"required />
+                                    </div>
+                                    <br>
+                                    
+                            </div>
     
-                    <button type="submit">SUBMIT</button>
+                    <button type="submit" style="border-radius:12px">SUBMIT</button>
                             
                         </form>
                     </div><!--main-center"-->
