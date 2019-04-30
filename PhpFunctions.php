@@ -7,7 +7,7 @@ function ConnectDatabase()
 
 //declaration variables
 $servername = "localhost";
-$username = "username";
+$username = "root";
 $password = "";
 $dbname = "bdd_amazon_ece";
 
