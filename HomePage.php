@@ -1,96 +1,90 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>ECE Amazon</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="design.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<title>ECE Amazon</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="HomePage.css">
 
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="#"><img src="ece_logo V.png"></a>
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div align="center"><center>
-        <TABLE bgcolor="#FFFFFF">
-                <tr>
-                    <td>
-                <INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
-                    <INPUT TYPE=hidden name=hl value=fr>
-                         
-                    <INPUT type=submit name=btnG VALUE="Search on this website"> 
-                    </td>
-                        </tr>
-                    </TABLE>
-                    </center>
-        </div>
-    </nav>
 
-    <div class="navbar">
-    <div class="dropdown">
+
+<div id="header_color">
+        <img src="logoeceamazon_bisbis.png">  
+        <center><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
+        <INPUT type=submit name=btnG VALUE="Search on this website"></center>         
+</div>
+  
+<br>
+<div class="navbar">
+<a href="HomePageNew">Accueil</a>
+  <div class="dropdown">
     <button class="dropbtn">Categories 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Ajouter un produit</a>
-      <a href="#">Mes produits en vente</a>
+    <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
+      <a href="SellingPage.php?Cat=1" id="music">Musique</a>
+      <a href="SellingPage.php?Cat=2" id="vetement">V&ecirctement</a>
+      <a href="SellingPage.php?Cat=3" id="sport">Sport & Loisirs</a>
     </div>
   </div> 
 
-  
-  <a href="#home">Vendre</a>
-  <a href="#home">Admin</a>
-  <a href="#home">Panier</a>
-  <a href="#home">Mon Compte</a>
-  <a href="#home">Se Connecter</a>
+  <a href="SellProductPage">Vendre</a>
+  <a href="AdminPage">Admin</a>
+    <div id="text_nav">
+  <a href="PanierPage.php">Panier</a>
+  <a href="#">Mon Compte</a>
+  <a href="Login.php">Se Connecter</a>
 
-  </div>
-
-    <header class="page-header header container-fluid">
-
-    <div id="promo">
-
-    <div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  </div>
+</div>
 </div>
 
-    </div>
-    <div id="bottom">
-    </div>
-    </header>
+<div id="promo">
+      <img src="france1.jpg" id="0" width="100%" height= "400px"/>
+</div>
 
+<div id="bottom">
+<img src="france2.jpg" id="0" width="100%" height= "400px"/>
+</div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.header').height($(window).height());
+    });
+</script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.header').height($(window).height());
-        });
-    </script>
-
-    <footer>
+<footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <h6 class="text-uppercase font-weight-bold">Information additionnelle</h6>
                     <p>
-                        37, quai de Grenelle, 75015 Paris, France
-                        info@webDynamique.ece.fr 
-                        +33 01 02 03 04 05
-                        +33 01 03 02 05 04
+                        Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
                     </p>
-                &copy; 2019 Copyright | Droit d'auteur: webDynamique.ece.fr
+                    <p>
+                        Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                    <p>
+                        37, quai de Grenelle, 75015 Paris, France <br>
+                        info@webDynamique.ece.fr <br>
+                    </p>
+                </div>
+            </div>
+  </div>
+            <div class="footer-copyright text-center">&copy; 2019 Copyright | Droit d'auteur: webDynamique.ece.fr</div>
     </footer>
 
 </body>
 
+
+
+</body>
 </html>
