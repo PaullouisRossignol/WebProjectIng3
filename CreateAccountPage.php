@@ -15,48 +15,69 @@
     <link rel="stylesheet" type="text/css" href="HomePage.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <title>Se Connecter</title>
 </head>
-
 <body>
 
-    <div class="wrapper fadeInDown">
+<div id="header_color">
+        <img src="logoeceamazon_bisbis.png">
+        <center><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
+        <INPUT type=submit name=btnG VALUE="Search on this website"></center>         
+</div>
+  
+<br>
+<div class="navbar">
+<a href="HomePageNew">Accueil</a>
+  <div class="dropdown">
+    <button class="dropbtn">Categories 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="SellingPage.php">Livres</a>
+      <a href="SellingPage.php">Musique</a>
+      <a href="SellingPage.php">V&ecirctement</a>
+      <a href="SellingPage.php">Sport & Loisirs</a>
+    </div>
+  </div> 
+
+  <a href="SellProductPage">Vendre</a>
+  <a href="AdminPage">Admin</a>
+    <div id="text_nav">
+  <a href="PanierPage.php">Panier</a>
+  <a href="#news">Mon Compte</a>
+  <a href="Login.php">Se Connecter</a>
+
+</div>
+</div>
+
+<div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
 
             <!-- Icon -->
             <div class="fadeIn first">
                <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Connection" />-->
-               Connection
             </div>
 
             <!-- Login Form -->
             <form action="Connection.php" method="POST">
+                <input type="text" id="name" class="fadeIn second" name="name" placeholder="Name">
+                <input type="text" id="surname" class="fadeIn second" name="surname" placeholder="Surname">
                 <input type="text" id="login" class="fadeIn second" name="email" placeholder="Email">
                 <input type="password" id="password" class="fadeIn third" name="pwd" placeholder="Password">
-                <input type="submit" class="fadeIn fourth" value="Se connecter">
+                <input type="submit" class="fadeIn fourth" value="Créer mon compte">
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="CreateAccountPage">Pas encore de compte?</a>
+                <a class="underlineHover" href="Login.php">Vous avez déjà un compte ?</a>
             </div>
 
         </div>
     </div>
 
-    <script type="text/javascript">
-    $(document).ready(function () {
-        $('.header').height($(window).height());
-    });
-</script>
-
-<footer>
-        <small>37, quai de Grenelle, 75015 Paris, France
-        &copy; 2019 Copyright | Droit d'auteur: webDynamique.ece.fr</small>
-</footer>
-
-
-</body>
-
-</html>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/query-1.11.2.min.js"></script>
+    </body>
+    </html>

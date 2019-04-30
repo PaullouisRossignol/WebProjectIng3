@@ -35,7 +35,6 @@ mysqli_report(MYSQLI_REPORT_OFF);
     $sql = "USE ".$dbname;
     //connecting to database
     if ($conn->query($sql) === TRUE) {
-        echo "<center style='font-size:12px'>|Connected to database|<br></center>";
         $conn->set_charset('utf8');
         $conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
     } 
