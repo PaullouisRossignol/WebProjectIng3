@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="HomePage.css">
+
 </head>
 <body>
 
@@ -24,7 +27,7 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-    <a href="SellingPage.php?Cat=0" id="livres">Livres</p>
+    <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
       <a href="SellingPage.php?Cat=1" id="music">Musique</a>
       <a href="SellingPage.php?Cat=2" id="vetement">V&ecirctement</a>
       <a href="SellingPage.php?Cat=3" id="sport">Sport & Loisirs</a>
@@ -41,16 +44,43 @@
 </div>
 </div>
 
+<div id="promo">
+      <img src="france1.jpg" id="0" width="100%" height= "400px"/>
+</div>
+
+<div id="bottom">
+<img src="france2.jpg" id="0" width="100%" height= "400px"/>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('.header').height($(window).height());
     });
 </script>
 
-<footer>
-        <small>37, quai de Grenelle, 75015 Paris, France
-        &copy; 2019 Copyright | Droit d'auteur: webDynamique.ece.fr</small>
-</footer>
+<footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <h6 class="text-uppercase font-weight-bold">Information additionnelle</h6>
+                    <p>
+                        Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
+                    </p>
+                    <p>
+                        Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
+                    </p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                    <p>
+                        37, quai de Grenelle, 75015 Paris, France <br>
+                        info@webDynamique.ece.fr <br>
+                    </p>
+                </div>
+            </div>
+  </div>
+            <div class="footer-copyright text-center">&copy; 2019 Copyright | Droit d'auteur: webDynamique.ece.fr</div>
+    </footer>
 
 </body>
 
