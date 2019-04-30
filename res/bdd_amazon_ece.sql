@@ -2,10 +2,10 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 29 avr. 2019 à 15:19
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Hôte : 127.0.0.1
+-- Généré le :  mar. 30 avr. 2019 à 21:20
+-- Version du serveur :  10.1.37-MariaDB
+-- Version de PHP :  7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,13 +28,11 @@ SET time_zone = "+00:00";
 -- Structure de la table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE `admin` (
   `Email` varchar(255) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Surname` varchar(255) NOT NULL,
-  `Pic_loc` varchar(255) NOT NULL,
-  PRIMARY KEY (`Email`)
+  `Pic_loc` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -50,20 +48,18 @@ INSERT INTO `admin` (`Email`, `Name`, `Surname`, `Pic_loc`) VALUES
 -- Structure de la table `bank_info`
 --
 
-DROP TABLE IF EXISTS `bank_info`;
-CREATE TABLE IF NOT EXISTS `bank_info` (
+CREATE TABLE `bank_info` (
   `Card_num` varchar(255) NOT NULL,
   `Type` varchar(255) NOT NULL,
   `Name_card` varchar(255) NOT NULL,
   `Exp_date` date NOT NULL,
-  `PostCode` int(11) NOT NULL,
+  `PostCode` varchar(255) NOT NULL,
   `Adr_1` varchar(255) NOT NULL,
   `Adr_2` varchar(255) NOT NULL,
   `City` varchar(255) NOT NULL,
-  `Sec_code` int(11) NOT NULL,
+  `Sec_code` varchar(255) NOT NULL,
   `Country` varchar(255) NOT NULL,
-  `Phone_number` varchar(255) NOT NULL,
-  PRIMARY KEY (`Card_num`)
+  `Phone_number` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -71,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `bank_info` (
 --
 
 INSERT INTO `bank_info` (`Card_num`, `Type`, `Name_card`, `Exp_date`, `PostCode`, `Adr_1`, `Adr_2`, `City`, `Sec_code`, `Country`, `Phone_number`) VALUES
-('123456789', 'Visa', 'MR PIERRE CAMUGLI', '2019-04-17', 92150, '33 rue du docteur magnan', '...', 'Suresnes', 123, 'France', '0650367245');
+('123456789', 'Visa', 'MR PIERRE CAMUGLI', '2019-04-17', '92150', '33 rue du docteur magnan', '...', 'Suresnes', '123', 'France', '0650367245');
 
 -- --------------------------------------------------------
 
@@ -79,14 +75,12 @@ INSERT INTO `bank_info` (`Card_num`, `Type`, `Name_card`, `Exp_date`, `PostCode`
 -- Structure de la table `clients`
 --
 
-DROP TABLE IF EXISTS `clients`;
-CREATE TABLE IF NOT EXISTS `clients` (
+CREATE TABLE `clients` (
   `Email` varchar(255) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Surname` varchar(255) NOT NULL,
   `Card_num` varchar(255) NOT NULL,
-  `Pic_loc` varchar(255) NOT NULL,
-  PRIMARY KEY (`Email`)
+  `Pic_loc` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -102,14 +96,14 @@ INSERT INTO `clients` (`Email`, `Name`, `Surname`, `Card_num`, `Pic_loc`) VALUES
 -- Structure de la table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE IF NOT EXISTS `products` (
+CREATE TABLE `products` (
   `Name` varchar(255) NOT NULL,
   `ID` int(11) NOT NULL,
   `Price` int(11) NOT NULL,
   `Descr` varchar(255) NOT NULL,
   `Cat` int(11) NOT NULL,
   `Qty` int(11) NOT NULL,
+  `TauxPromo` varchar(255) NOT NULL DEFAULT '0',
   `Size` int(11) NOT NULL,
   `Color` int(11) NOT NULL,
   `Sex` int(11) NOT NULL,
@@ -122,8 +116,8 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Déchargement des données de la table `products`
 --
 
-INSERT INTO `products` (`Name`, `ID`, `Price`, `Descr`, `Cat`, `Qty`, `Size`, `Color`, `Sex`, `Seller`, `Pic_loc`, `Vid_link`) VALUES
-('Camionosor', 252525, 12000, 'Super camion qui tue', 1, 1, 0, 0, 0, 'vendeur@vendeur.com', 'Camion.PNG', 'Vendeur.PNG');
+INSERT INTO `products` (`Name`, `ID`, `Price`, `Descr`, `Cat`, `Qty`, `TauxPromo`, `Size`, `Color`, `Sex`, `Seller`, `Pic_loc`, `Vid_link`) VALUES
+('Camionosor', 252525, 12000, 'Super camion qui tue', 1, 1, '0', 0, 0, 0, 'vendeur@vendeur.com', 'Camion.PNG', 'Vendeur.PNG');
 
 -- --------------------------------------------------------
 
@@ -131,14 +125,12 @@ INSERT INTO `products` (`Name`, `ID`, `Price`, `Descr`, `Cat`, `Qty`, `Size`, `C
 -- Structure de la table `seller`
 --
 
-DROP TABLE IF EXISTS `seller`;
-CREATE TABLE IF NOT EXISTS `seller` (
+CREATE TABLE `seller` (
   `Email` varchar(255) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Surname` varchar(255) NOT NULL,
   `Pic_loc` varchar(255) NOT NULL,
-  `Back_pic_loc` varchar(255) NOT NULL,
-  PRIMARY KEY (`Email`)
+  `Back_pic_loc` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -154,12 +146,10 @@ INSERT INTO `seller` (`Email`, `Name`, `Surname`, `Pic_loc`, `Back_pic_loc`) VAL
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) DEFAULT NULL,
-  `Type` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Email`)
+  `Type` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -170,6 +160,40 @@ INSERT INTO `users` (`Email`, `Password`, `Type`) VALUES
 ('pierre.camugli@hotmail.fr', 'je sais plus', 0),
 ('vendeur@vendeur.com', '123', 1),
 ('picolo.pico@edu.fr', 'azerty', 2);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`Email`);
+
+--
+-- Index pour la table `bank_info`
+--
+ALTER TABLE `bank_info`
+  ADD PRIMARY KEY (`Card_num`);
+
+--
+-- Index pour la table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`Email`);
+
+--
+-- Index pour la table `seller`
+--
+ALTER TABLE `seller`
+  ADD PRIMARY KEY (`Email`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`Email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
