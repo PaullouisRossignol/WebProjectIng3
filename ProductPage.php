@@ -36,7 +36,15 @@
       </div> 
 
       <a href="SellProductPage.php">Vendre</a>
-      <a href="AdminPage.php">Admin</a>
+      <div class="dropdown">
+        <button class="dropbtn">Admin 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="SellingPage.php?Cat=0" id="livres">Gérer les vendeurs</a>
+          <a href="SellingPage.php?Cat=1" id="music">Gérer les produits</a>
+        </div>
+      </div>
       <a href="PanierPage.php">Panier</a>
       <a href="MyAccount.php">Mon Compte</a>
       <a href="Login.php">Se Connecter</a>
