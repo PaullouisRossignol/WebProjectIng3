@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="HomePage.css">
@@ -37,11 +37,9 @@
 
       <a href="SellProductPage.php">Vendre</a>
       <a href="AdminPage.php">Admin</a>
-      <div id="text_nav">
-          <a href="PanierPage.php">Panier</a>
-          <a href="#">Mon Compte</a>
-        <a href="Login.php">Se Connecter</a>
-      </div>
+      <a href="PanierPage.php">Panier</a>
+      <a href="MyAccount.php">Mon Compte</a>
+      <a href="Login.php">Se Connecter</a>
   </div>
 </div>
 
@@ -72,36 +70,7 @@
 					</div>
 				</div>
 	
-				<div class="col-md-7">
-					<?php
-					include "PhpFunctions.php";
-
-					//DATABASE
-					$conn=ConnectDatabase();
-					
-					//si le BDD existe, faire le traitement
-					$conn->set_charset('utf8');
-					$conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-					$sql = "SELECT * FROM products WHERE ID=".$_GET['Id'];
-					$result = $conn->query( $sql);
-					while ($data = mysqli_fetch_assoc($result)) {
-						echo "<div class=product-title>".$data['Name']."</div>";
-						echo "<div class='product-desc'>".$data['Descr']."</div>";
-						echo "<div class='product-rating'><i class='fa fa-star gold'></i> <i class='fa fa-star gold'></i> <i class='fa fa-star gold'></i> <i class='fa fa-star gold'></i> <i class='fa fa-star-o'></i> </div>";
-						echo "<hr>";
-						echo "<div class='product-price'>".$data['Price']." €</div>";
-						echo "<div class='product-stock'>In Stock</div>";
-						echo "<hr>";
-					}//end while
-						
-					//fermer la connection
-					$conn->close();
-					?>
-						<div class='btn-group cart'>
-							<button type='button' class='btn btn-success' id='addToCart' onclick="addToCart()">
-								Ajouter au panier
-						</button>
-				</div>	
+				
 			</div>
 		</div> 
 	</div>
@@ -110,8 +79,7 @@
 				<ul id="myTab" class="nav nav-tabs nav_tabs">
 						
 					<li class="active"><a href="#service-one" data-toggle="tab">DESCRIPTION</a></li>
-					<li><a href="#service-two" data-toggle="tab">PRODUCT INFO</a></li>
-					<li><a href="#service-three" data-toggle="tab">REVIEWS</a></li>
+					
 						
 				</ul>
 				<div id="myTabContent" class="tab-content">

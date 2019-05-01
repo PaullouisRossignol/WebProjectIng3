@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="HomePage.css">
@@ -36,11 +36,9 @@
 
       <a href="SellProductPage.php">Vendre</a>
       <a href="AdminPage.php">Admin</a>
-      <div id="text_nav">
-          <a href="PanierPage.php">Panier</a>
-          <a href="#">Mon Compte</a>
-        <a href="Login.php">Se Connecter</a>
-      </div>
+      <a href="PanierPage.php">Panier</a>
+      <a href="MyAccount.php">Mon Compte</a>
+      <a href="Login.php">Se Connecter</a>
   </div>
 </div>
 
