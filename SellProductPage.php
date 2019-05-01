@@ -40,8 +40,8 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="SellingPage.php?Cat=0" id="livres">Gérer les vendeurs</a>
-          <a href="SellingPage.php?Cat=1" id="music">Gérer les produits</a>
+          <a href="AdminPage.php">Gérer les vendeurs</a>
+          <a href="AdminPage.php">Gérer les produits</a>
         </div>
       </div>
       <a href="PanierPage.php">Panier</a>
