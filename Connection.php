@@ -41,7 +41,7 @@ $sql="SELECT * FROM users";
                             echo "admin.";
                             break;
                     }
-                    echo "<br><a href='index.html'>Home Page</a></center>";
+                    echo "<br><a href='HomePage.php'>Home Page</a></center>";
                     $connected+=1;
                     break;
                 }
@@ -64,13 +64,6 @@ else
     echo "<center><div>There is not any account yet<br>Please create an account<br><a href='index.html'>Home Page</a></div></center>";
 
 $conn->close();
-
-
-
-
-
-
-
 
 ?>
 

@@ -16,11 +16,10 @@
 <body>
     <div class="wrapper fadeInDown">
         <div id="formContent">
-            <!-- Tabs Titles -->
-
-            <!-- Icon -->
+            
+            <!-- Titre de la boite -->
             <div class="fadeIn first">
-                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Connection" />
+                Connection
             </div>
 
             <!-- Login Form -->
@@ -32,7 +31,7 @@
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="creerCompte.html">Pas encore de compte?</a>
+                <a class="underlineHover" href="creerCompte.php">Pas encore de compte?</a>
             </div>
 
         </div>
