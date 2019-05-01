@@ -46,12 +46,23 @@ mysqli_report(MYSQLI_REPORT_OFF);
     return $conn;
 }
 //code pour sauvegarder une image dans le répertoire du projet
-function SauvegardeImage($fileName,$fileTMP)
+function SauvegardeImage($fileName,$fileTMP,$fileSize)
 {
+	
+?><script>
+                console.log( <?php echo "'$fileSize'"; ?>);
+            </script>
+            <?php
+
+
 
 //répertoire de déstination
 $target_dir = "res/";
 	$target_file = $target_dir . basename($fileName);
+	?><script>
+                console.log( <?php echo "'$target_file'"; ?>);
+            </script>
+            <?php
 	//on initialise la variable update ok
 	$uploadOk = 1;
 	//on recup l'extention du fichier
@@ -60,19 +71,40 @@ $target_dir = "res/";
 	
 	// le fichier existe déjà?
 	if (file_exists($target_file)) {
-		return false;
+		?>
+            <script>
+                console.log("Le fichier existe déja");
+            </script>
+            <?php
+		return $target_file;
 		$uploadOk = 0;
+		 
 	}
 	
 	// les formats autorisés
 	if($imageFileType != "jpg" &&$imageFileType != "JPG"&& $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg" && $imageFileType != "JPEG" && $imageFileType != "gif" && $imageFileType != "GIF") {
-		
+		?><script>
+                console.log("Format non autorisé");
+            </script>
+            <?php
 		return false;
 		$uploadOk = 0;
 	}
 	// erreur
 	if ($uploadOk == 0) {
+		?><script>
+                console.log("UploadOk=0");
+            </script>
+            <?php
 		return false;
+
+		// le poid de l'image
+	if ($fileSize > 500000) {
+
+		return true;
+		$uploadOk = 0;
+	}
+
 		
 	// tt c'est bien passé
 	} else {
@@ -85,6 +117,10 @@ $target_dir = "res/";
             <?php
 				
 		} else {
+			?><script>
+                console.log("Probleme a l'enregistrement de l'image");
+            </script>
+            <?php
 			return false;
 		}
     }

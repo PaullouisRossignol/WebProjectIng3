@@ -59,7 +59,7 @@
             $codeSec = $_POST["codeSec"];
             if (isset($_FILES['photo']))
             {
-                $photoName = SauvegardeImage($_FILES["photo"]["name"], $_FILES["photo"]["tmp_name"]);
+                $photoName = SauvegardeImage($_FILES["photo"]["name"], $_FILES["photo"]["tmp_name"],$_FILES["photo"]["size"]);
             
 
             if ($photoName != false) {
@@ -123,9 +123,13 @@
             } else {
                 echo "<div class='main-center'>Error: " . $sql . "<br>" . $conn->error . "</div>";
             }
-        }else
+        }else if($photoName==false)
         {
             echo "<div class='main-center'> Erreur a l'enregistrement de la photo</div>";
+        }
+        else if($photoName==true)
+        {
+            echo "<div class='main-center'> Votre image est trop grosse</div>";
         }
     }else
     {
