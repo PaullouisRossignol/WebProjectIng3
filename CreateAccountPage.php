@@ -45,7 +45,7 @@
   <a href="AdminPage">Admin</a>
     <div id="text_nav">
   <a href="PanierPage.php">Panier</a>
-  <a href="#news">Mon Compte</a>
+  <a href="MyAccount.php">Mon Compte</a>
   <a href="Login.php">Se Connecter</a>
 
 </div>

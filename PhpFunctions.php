@@ -45,51 +45,6 @@ mysqli_report(MYSQLI_REPORT_OFF);
           
     return $conn;
 }
-//code pour sauvegarder une image dans le répertoire du projet
-function SauvegardeImage($fileName,$fileTMP)
-{
-
-//répertoire de déstination
-$target_dir = "res/";
-	$target_file = $target_dir . basename($fileName);
-	//on initialise la variable update ok
-	$uploadOk = 1;
-	//on recup l'extention du fichier
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	
-	
-	// le fichier existe déjà?
-	if (file_exists($target_file)) {
-		return false;
-		$uploadOk = 0;
-	}
-	
-	// les formats autorisés
-	if($imageFileType != "jpg" &&$imageFileType != "JPG"&& $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg" && $imageFileType != "JPEG" && $imageFileType != "gif" && $imageFileType != "GIF") {
-		
-		return false;
-		$uploadOk = 0;
-	}
-	// erreur
-	if ($uploadOk == 0) {
-		return false;
-		
-	// tt c'est bien passé
-	} else {
-		if (move_uploaded_file($fileTMP, $target_file)) {
-			
-            ?>
-            <script>
-                console.log("Image ajoutée avec succès.");
-            </script>
-            <?php
-				
-		} else {
-			return false;
-		}
-    }
-    return $target_file;
-}
 
 
 ?>
