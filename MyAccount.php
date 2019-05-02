@@ -24,38 +24,10 @@
 <body>
 
 <!------ HEADER NAVBAR ---------->
-<div id="header_color">
-  <img src="res/logoeceamazon_bisbis.png">  
-    <span align="center"><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
-    <INPUT type=submit name=btnG VALUE="Search on this website"></span>
-  
-  <br>
-    <div class="navbar">
-      <a href="HomePage.php">Accueil</a>
-      <div class="dropdown">
-        <button class="dropbtn">Categories 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-        <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
-          <a href="SellingPage.php?Cat=1" id="music">Musique</a>
-          <a href="SellingPage.php?Cat=2" id="vetement">V&ecirctement</a>
-          <a href="SellingPage.php?Cat=3" id="sport">Sport & Loisirs</a>
-        </div>
-      </div> 
-
-      <a href="SellProductPage.php">Vendre</a>
-      <a href="AdminPage.php">Admin</a>
-      
-          <a href="PanierPage.php">Panier</a>
-          <a href="#">Mon Compte</a>
-        <a href="Login.php">Se Connecter</a>
-      
-  </div>
-</div>
+<?php include("header.php"); ?>
 
 <!------ CONTAINER BODY ---------->
-<div class="container">
+<div class="container" id="heyho">
   
   <br>
   <h1>Mon Compte : </h1>
@@ -135,11 +107,14 @@
                               while ($row = $result->fetch_assoc()) 
                                 {
                                    echo " <style>
-                                              .container 
+                                              #heyho
                                               {
                                                 background-image: url('".$row['Back_pic_loc']."');
                                                 background-repeat: no-repeat;
-                                              }
+                                                 background-position: center center;
+                                                 background-size: cover;  
+                                                   background-clip: content-box;
+                                            }
                                           </style>
 
                                           <div class='row'>
@@ -219,6 +194,8 @@
 
 
       ?>
+  </div>
+
 
 
 
