@@ -22,8 +22,36 @@
 </head>
 <body>
 
-<!------ HEADER NAVBAR ----------> 
-<?php include("header.php"); ?>
+<!------ HEADER NAVBAR ---------->
+<div id="header_color">
+  <img src="res/logoeceamazon_bisbis.png">  
+    <span align="center"><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
+    <INPUT type=submit name=btnG VALUE="Search on this website"></span>
+  
+  <br>
+    <div class="navbar">
+      <a href="HomePage.php">Accueil</a>
+      <div class="dropdown">
+        <button class="dropbtn">Categories 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+        <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
+          <a href="SellingPage.php?Cat=1" id="music">Musique</a>
+          <a href="SellingPage.php?Cat=2" id="vetement">V&ecirctement</a>
+          <a href="SellingPage.php?Cat=3" id="sport">Sport & Loisirs</a>
+        </div>
+      </div> 
+
+      <a href="SellProductPage.php">Vendre</a>
+      <a href="AdminPage.php">Admin</a>
+      
+          <a href="PanierPage.php">Panier</a>
+          <a href="#">Mon Compte</a>
+        <a href="Login.php">Se Connecter</a>
+      
+  </div>
+</div>
 
 <!------ CONTAINER BODY ---------->
 <div class="container">
@@ -42,15 +70,19 @@
 
       switch($_SESSION["type"])
       {
+
+
+        //                                                                                                  CLIENT
         case 0: 
           
           $sql="SELECT * FROM clients WHERE Email = '".$_SESSION["user"]."'";
           $result = $conn->query($sql);
 
-          while ($row = $result->fetch_assoc()) {
+         
 
           if (isset($result->num_rows)) {
             if ($result->num_rows > 0) {
+               while ($row = $result->fetch_assoc()) {
               // echo"
               // "
               // <div class='card-columns'>
@@ -59,22 +91,22 @@
               //         <p class='card-text'>Some text inside the fifth card</p>
               //       </div>
               //     </div>
-                 echo "<div class='row'>
-                          <div class='col-4'></div>
-  
+                echo "<div class='row'>
+                              <div class='col-4'>
+                              </div>
                               <div class='col-8'>
-                <div class='card ' style='width:400px'>
-                  <img class='card-img-top' src='".$row['Pic_loc']."' alt='Card image'>
-                    <div class='card-body'>
-                        <h4 class='card-title text-center'>Compte Client: " . $row['Name'] ." ". $row['Surname'] ."</h4>
-                      <p class='card-text'>Numéro de Carte : ". $row['Card_num'] ." </p>
-                      <p class='card-text'>Adresse Email: ".$row['Email']."</p>
-               
-                    </div>
-                </div>
-                </div>
-                </div>
-                ";
+                                    <div class='card ' style='width:400px'>
+                                      <img class='card-img-top' src='".$row['Pic_loc']."' alt='Card image'>
+                                      <div class='card-body'>
+                                        <h4 class='card-title text-center'>Compte Client: " . $row['Name'] ." ". $row['Surname'] ."</h4>
+                                        <p class='card-text'>Numéro de Carte : ". $row['Card_num'] ." </p>
+                                        <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                   
+                                      </div>
+                                    </div>
+                              </div>
+                            </div>
+                          ";
 
              //    <div class='card bg-light'>
              //      <div class='card-body text-center'>
@@ -98,8 +130,6 @@
                 //      echo "<h2>Numéro de Carte : </h2>";
                 //     echo "<td>" . $row['Card_num'] . "</td>";
                 //      echo "<h2>Photo de profile: </h2>";
-
-
                 //     echo "<img src='".$row['Pic_loc']."' class='rounded-circle' alt='Photo de Profil'>";
                 }
                 
@@ -114,11 +144,83 @@
 
 
           break;
+          //                                                                                                  Vendeur
         case 1: 
-          echo "vendeur.";
+         
+          $sql="SELECT * FROM seller WHERE Email = '".$_SESSION["user"]."'";
+          $result = $conn->query($sql);
+
+            
+
+              if (isset($result->num_rows)) 
+              {
+                if ($result->num_rows > 0) 
+                    {
+                      while ($row = $result->fetch_assoc()) 
+                        {
+                           echo " <style>
+                                      .container 
+                                      {
+                                        background-image: url('".$row['Back_pic_loc']."');
+                                        background-repeat: no-repeat;
+                                      }
+                                  </style>
+
+                                  <div class='row'>
+                                    <div class='col-4'>
+                                    </div>
+                                    <div class='col-8'>
+                                          <div class='card ' style='width:400px'>
+                                            <img class='card-img-top' src='".$row['Pic_loc']."' alt='".$row['Pic_loc']."'>
+                                            <div class='card-body'>
+                                              <h4 class='card-title text-center'>Compte Vendeur: " . $row['Name'] ." ". $row['Surname'] ."</h4>
+                                              <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                         
+                                            </div>
+                                          </div>
+                                    </div>
+                                  </div>
+                                ";
+                           }
+                    
+                      } else  echo "<center><div>Erreur à l'affichage des informations de votre compte <br><a href='HomePage.html'>Home Page</a></div></center>";
+              }
+
           break;
         case 2: 
-          echo "admin.";
+         
+           $sql="SELECT * FROM admin WHERE Email = '".$_SESSION["user"]."'";
+          $result = $conn->query($sql);
+
+            
+
+              if (isset($result->num_rows)) 
+              {
+                if ($result->num_rows > 0) 
+                    {
+                      while ($row = $result->fetch_assoc()) 
+                        {
+                           echo "
+                                  <div class='row'>
+                                    <div class='col-4'>
+                                    </div>
+                                    <div class='col-8'>
+                                          <div class='card ' style='width:400px'>
+                                            <img class='card-img-top' src='".$row['Pic_loc']."' alt='".$row['Pic_loc']."'>
+                                            <div class='card-body'>
+                                              <h4 class='card-title text-center'>Compte Admin: " . $row['Name'] ." ". $row['Surname'] ."</h4>
+                                              <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                         
+                                            </div>
+                                          </div>
+                                    </div>
+                                  </div>
+                                ";
+                           }
+                    
+                      } else  echo "<center><div>Erreur à l'affichage des informations de votre compte <br><a href='HomePage.html'>Home Page</a></div></center>";
+              }
+
           break;
       }
 
