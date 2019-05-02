@@ -10,6 +10,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="HomePage.css">
+<link rel="stylesheet" type="text/css" href="ProductList.css">
 </head>
 <body>
 
@@ -50,42 +51,45 @@
   </div>
 </div>
 
+
 <!------ CONTAINER BODY ---------->
-<div class="container">
-  <?php
+<?php
+	include "PhpFunctions.php";
 
-  include "PhpFunctions.php";
-
-  //DATABASE
-  $conn=ConnectDatabase();
-
+	//DATABASE
+	$conn=ConnectDatabase();
+					
   //si le BDD existe, faire le traitement
+  $conn->set_charset('utf8');
+  $conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+  $sql = "SELECT * FROM products WHERE Cat=".$_GET['Cat'];
+  $result = $conn->query( $sql);
+?>
 
-      $sql = "SELECT * FROM products WHERE Cat=$_GET[Cat]";
-      $result = $conn->query( $sql);
-      while ($data = mysqli_fetch_assoc($result)) {
-      echo "<div id='rightcolumn'>Pic_loc:" . $data['Pic_loc'] .'<br>';
-      echo "<a href='ProductPage.php?Id=".$data['ID']."'> " . $data['Name'] . '</a><br>';
-      echo "ID:" . $data['ID'] . '<br>';
-      echo "Price: " . $data['Price'] . '<br>';
-      echo "Desc: " . $data['Descr'] . '<br>';
-      echo "Qty: " . $data['Qty'] .'<br>';
-      echo "Price: " . $data['Price'] .'<br>';
-      echo "Seller: " . $data['Seller'] .'<br>';
-      echo "Size: " . $data['Size'] .'<br>';
-      echo "Color: " . $data['Color'] .'<br>';
-      echo "Sex: " . $data['Sex'] .'<br>';
-      echo "Vid_link: " . $data['Vid_link'] .'<br><br></div>';
-      }//end while
-    
-    //end if
-    //si le BDD n'existe pas
-    
-    //fermer la connection
-    $conn->close();
-  ?>
+<div class="container">
+  <div id="list_bloc">
+    <?php while ($data = mysqli_fetch_assoc($result)) {  
+      echo "<div class='bloc_produit'>
+              <div class='bloc_sup'>
+                <table>
+                  <tr>
+                    <td><div class='img_bloc'>Image</div></td>
+                    <td valign='top'>
+                      <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
+                      <div class='format_prix'>".$data['Price']." €</div>
+                      <div class='desc'>
+                        ".$data['Descr']."
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>";}
+            //fermer la connection
+            $conn->close();
+      ?> 
+  </div>
 </div>
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('.header').height($(window).height());
