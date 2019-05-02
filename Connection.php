@@ -50,23 +50,23 @@
                                             echo "admin.";
                                             break;
                                     }
-                                    echo "<br><a href='index.html'>Home Page</a></center></div>";
+                                    echo "<br><a href='HomePage.php'>Home Page</a></center></div>";
                                     $connected += 1;
                                     break;
                                 } else {
-                                    echo "<center><div class='main-center' >Wrong password<br>Try again<br><a href='index.html'>Home Page</a></div></center>";
+                                    echo "<center><div class='main-center' >Wrong password<br>Try again<br><a href='HomePage.php'>Home Page</a></div></center>";
                                     $connected += 1;
                                     break;
                                 }
                         }
                 }
                 if ($connected == 0)
-                    echo "<center><div class='main-center'>Your pseudo does not exists<br>Please create an account<br><a href='index.html'>Home Page</a></div></center>";
+                    echo "<center><div class='main-center'>Your pseudo does not exists<br>Please create an account<br><a href='HomePage.php'>Home Page</a></div></center>";
             } else
-                echo "<center><div class='main-center'>There is not any account yet<br>Please create an account<br><a href='index.html'>Home Page</a></div></center>";
+                echo "<center><div class='main-center'>There is not any account yet<br>Please create an account<br><a href='HomePage.php'>Home Page</a></div></center>";
         }
         else
-            echo"<center><div class='main-center'>There is not any account on the database yet<br>Please create an account<br><a href='index.html'>Home Page</a></div></center>";
+            echo"<center><div class='main-center'>There is not any account on the database yet<br>Please create an account<br><a href='HomePage.php'>Home Page</a></div></center>";
 
     $conn->close();
 
