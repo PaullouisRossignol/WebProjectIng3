@@ -1,0 +1,46 @@
+#list_bloc{
+    margin-left: 50px;
+    border: 1px solid grey;
+    margin-bottom: 15px;
+}
+.bloc_produit{
+    border: 1px solid grey;
+    padding: 25px;
+}
+.bloc_produit:hover{
+    background-color: #ddd;
+}
+.bloc_sup{
+background-color: white;
+}
+.bloc_sup:hover{
+    background-color: #ddd;
+}
+.img_bloc{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+.format_title{
+    margin-left: 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.format_title:hover{
+    color: rgb(167, 11, 11);
+    text-decoration: underline;
+}
+.format_prix{
+    margin-left: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(255, 81, 0);
+}
+#format_btn{
+    position: relative;
+    margin-left: 50px;
+    bottom: -60px;
+}
+.desc{
+    margin-left: 15px;
+}
