@@ -39,9 +39,9 @@
             <td><div id="img_bloc">Image</div></td>
             <td valign="top">
             <?php while ($data = mysqli_fetch_assoc($result)) {  
-            echo "<div id='format_title'><div class=product-title>".$data['Name']."</div></div>
+            echo "<div id='format_title'>".$data['Name']."</div>
                 <div id='format_prix'>".$data['Price']." €</div>
-                <div id='format_stock'>In Stock</div>
+                <div id='format_stock'>En Stock</div>
                 <div id='format_btn'>
                 <div class='btn-group cart'>
 							<button type='button' class='btn btn-success' id='addToCart'>

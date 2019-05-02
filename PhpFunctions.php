@@ -76,15 +76,7 @@ function SauvegardeImage($fileName, $fileTMP, $fileSize)
         $uploadOk = 0;
     }
 
-    // les formats autorisés
-    if ($imageFileType != "jpg" && $imageFileType != "JPG" && $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg" && $imageFileType != "JPEG" && $imageFileType != "gif" && $imageFileType != "GIF") {
-        ?><script>
-            console.log("Format non autorisé");
-        </script>
-        <?php
-        return false;
-        $uploadOk = 0;
-    }
+    
     // erreur
     if ($uploadOk == 0) {
         ?><script>

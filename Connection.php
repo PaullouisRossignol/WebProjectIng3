@@ -8,7 +8,6 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="creerCompte.css" rel="stylesheet" id="bootstrap-css">
@@ -50,23 +49,23 @@
                                             echo "admin.";
                                             break;
                                     }
-                                    echo "<br><a href='index.html'>Home Page</a></center></div>";
+                                    echo "<br><a href='HomePage.php'>Home Page</a></center></div>";
                                     $connected += 1;
                                     break;
                                 } else {
-                                    echo "<center><div class='main-center' >Wrong password<br>Try again<br><a href='index.html'>Home Page</a></div></center>";
+                                    echo "<center><div class='main-center' >Wrong password<br>Try again<br><a href='HomePage.php'>Home Page</a></div></center>";
                                     $connected += 1;
                                     break;
                                 }
                         }
                 }
                 if ($connected == 0)
-                    echo "<center><div class='main-center'>Your pseudo does not exists<br>Please create an account<br><a href='index.html'>Home Page</a></div></center>";
+                    echo "<center><div class='main-center'>Your pseudo does not exists<br>Please create an account<br><a href='HomePage.php'>Home Page</a></div></center>";
             } else
-                echo "<center><div class='main-center'>There is not any account yet<br>Please create an account<br><a href='index.html'>Home Page</a></div></center>";
+                echo "<center><div class='main-center'>There is not any account yet<br>Please create an account<br><a href='HomePage.php'>Home Page</a></div></center>";
         }
         else
-            echo"<center><div class='main-center'>There is not any account on the database yet<br>Please create an account<br><a href='index.html'>Home Page</a></div></center>";
+            echo"<center><div class='main-center'>There is not any account on the database yet<br>Please create an account<br><a href='HomePage.php'>Home Page</a></div></center>";
 
     $conn->close();
 

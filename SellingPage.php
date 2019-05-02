@@ -59,14 +59,14 @@
 <script type="text/javascript">
     $(document).ready(function() {
             $('.bloc_produit').mouseover(function(){
-              $('.bloc_produit').css("background-color", "#ddd");
-              $('.bloc_sup').css("background-color", "#ddd");
-              $('.img_bloc').css("background-color", "white");
+              $(this).css("background-color", "#ddd");
+              $(this).children().css("background-color", "#ddd");
+            $('.img_bloc').css("background-color", "white");
               
             });
             $('.bloc_produit').mouseout(function(){
-              $('.bloc_produit').css("background-color", "white");
-              $('.bloc_sup').css("background-color", "white");
+              $(this).css("background-color", "white");
+              $(this).children().css("background-color", "white");
             });
         });
 </script>
