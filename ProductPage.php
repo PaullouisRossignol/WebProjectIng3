@@ -143,21 +143,18 @@
                         Ajouter au panier
                     </button>
                     </div></div>
-                    <td>";
-                    if ($data['Cat']==2)
-                    {
-                      echo"Taille : ".$data['Size']."<br>
-                           Couleur : ".$data['Color']."<br>
-                           Homme : ".$sexe."<br>
-                      ";
-                    }
-                     
-                    
-                    
-                    echo "</td></tr>
+                    </tr>
                   </table>
                 </div>
-                  <br><br><div id='desc'><h2>Description</h2><br>
+                  <br><br><div id='desc'><h2>Description</h2><br>";
+                  if ($data['Cat']==2)
+                  {
+                    echo"Taille : ".$data['Size']."<br>
+                         Couleur : ".$data['Color']."<br>
+                         Homme : ".$data['Sex']."<br>
+                    ";
+                  }
+                  echo"
                   " . $data['Descr'] . "
                   </div>
               </div>";
