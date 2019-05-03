@@ -51,7 +51,7 @@
                 //l'ajout de vidéo n'est pas une obligation
              if ($_FILES['vid']["name"]!="")
              {
-                $vidName ="res/". SauvegardeImage($_FILES["vid"]["name"], $_FILES["vid"]["tmp_name"],$_FILES["vid"]["size"]);
+                $vidName = SauvegardeImage($_FILES["vid"]["name"], $_FILES["vid"]["tmp_name"],$_FILES["vid"]["size"]);
                 
              }
              else{
@@ -59,7 +59,7 @@
              }
             if (isset($_FILES['photo']) )
             {
-                $photoName = "res/".SauvegardeImage($_FILES["photo"]["name"], $_FILES["photo"]["tmp_name"],$_FILES["photo"]["size"]);
+                $photoName = SauvegardeImage($_FILES["photo"]["name"], $_FILES["photo"]["tmp_name"],$_FILES["photo"]["size"]);
 
             if ($photoName != false || $vidName!= false) {
 
