@@ -12,12 +12,61 @@
 <link rel="stylesheet" type="text/css" href="HomePage.css">
 <link rel="stylesheet" type="text/css" href="ProductPageBis.css">
 
+<script>
+  function addToCart(){
+    document.location.href="ProductPage.php?Id="+<?php echo $_GET['Id']; ?>+"&Ajout=1";
+  }
+</script>
+
+
+
+
 </head>
 <body>
 
-<!------ HEADER NAVBAR ----------> 
-<?php include("header.php"); ?>
 
+
+<!------ HEADER NAVBAR ---------->
+<div id="header_color">
+  <img src="res/logoeceamazon_bisbis.png">  
+    <span align="center"><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
+    <INPUT type=submit name=btnG VALUE="Search on this website"></span>
+  
+  <br>
+    <div class="navbar">
+      <a href="HomePage.php">Accueil</a>
+      <div class="dropdown">
+        <button class="dropbtn">Categories 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+        <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
+          <a href="SellingPage.php?Cat=1" id="music">Musique</a>
+          <a href="SellingPage.php?Cat=2" id="vetement">V&ecirctement</a>
+          <a href="SellingPage.php?Cat=3" id="sport">Sport & Loisirs</a>
+        </div>
+      </div> 
+
+      <a href="SellProductPage.php">Vendre</a>
+      <div class="dropdown">
+        <button class="dropbtn">Admin 
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="AdminPage.php">Gérer les vendeurs</a>
+          <a href="AdminPage.php">Gérer les produits</a>
+        </div>
+      </div>
+      <a href="PanierPage.php">Panier</a>
+      <a href="MyAccount.php">Mon Compte</a>
+      <a href="Login.php">Se Connecter</a>
+  </div>
+</div>
+
+
+<!------ CONTAINER BODY ---------->
+
+<!-- Mise en place de la connexion et requete SQL -->
 <?php
 					include "PhpFunctions.php";
 
@@ -30,27 +79,40 @@
 					$sql = "SELECT * FROM products WHERE ID=".$_GET['Id'];
           $result = $conn->query( $sql);
 ?>
+<script>
+    console.log(<?php echo "'".$_GET['Id']."'"; ?>);
+    console.log('<?php
+    if (isset($_SESSION['Panier']))
+    {
+      print_r( $_SESSION['Panier']); 
+    } 
+    ?>');
 
-<!------ CONTAINER BODY ---------->
+</script>
 <div class="container">
-    <div id="bloc_sup">
+  <div id="bloc_sup">
     <table>
         <tr>
             <td><div id="img_bloc">Image</div></td>
             <td valign="top">
-            <?php while ($data = mysqli_fetch_assoc($result)) {  
-            echo "<div id='format_title'><div class=product-title>".$data['Name']."</div></div>
-                <div id='format_prix'>".$data['Price']." €</div>
-                <div id='format_stock'>In Stock</div>
-                <div id='format_btn'>
-                <div class='btn-group cart'>
-							<button type='button' class='btn btn-success' id='addToCart'>
-								Ajouter au panier
-						</button>
-                </div>
-</div>
-        </table>
-</div>
+              <?php while ($data = mysqli_fetch_assoc($result)) {
+                $price_promo = $data['Price'] *(1 - ($data['TauxPromo'])/100);
+                if($price_promo != $data['Price']){  
+              echo "<div id='format_title'><div class=product-title>".$data['Name']."</div></div>
+                    <div id='oldprix'><del>".$data['Price']." €</del></div>
+                    <div id='format_prix'>PROMOTION !!<br>".$price_promo." €</div>";}else{
+                      echo "<div id='format_title'><div class=product-title>".$data['Name']."</div></div>
+                      <div id='format_prix'>".$price_promo." €</div>";
+                      }
+                    echo "<div id='format_stock'>In Stock</div>
+                    <div id='format_btn'><div class='btn-group cart'>
+                    <button type='button' class='btn btn-success' id='addToCart' onclick='addToCart()'>
+                        Ajouter au panier
+                    </button>
+                    </div></div>
+        </tr>
+    </table>
+  </div>
     <br><br><div id='desc'><h2>Description</h2><br>
     ".$data['Descr']."
     Novo denique perniciosoque exemplo idem Gallus ausus est inire flagitium grave, 
@@ -59,11 +121,26 @@
      cuius erat inpendio gnarus, quid de Caesare quisque sentiret. 
      et haec confidenter agebat in urbe ubi pernoctantium luminum claritudo dierum solet imitari fulgorem. 
      postremo agnitus saepe iamque, si prodisset, conspicuum se fore contemplans, non nisi luce palam egrediens ad agenda quae putabat seria cernebatur. et haec quidem medullitus multis gementibus agebantur.
-</div></div>
-";}
+  </div>
+</div>"
+;}
+
 //fermer la connection
 $conn->close();?>
 
+<?php
+ 
+ if(isset($_GET["Ajout"])&& $_GET["Ajout"]==1)
+ {
+   $_SESSION["Panier"][]=$_GET["Id"];
+   ?>
+   <script>
+   console.log(<?php echo "'".$_GET['Id']."'"; ?>);
+
+   </script>
+   <?php
+ }
+?>
 <!------ FOOTER ---------->
 <footer class="page-footer">
   <div class="container">
