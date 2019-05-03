@@ -76,6 +76,8 @@ display: block;
 /* On ajoute une marge sur les cotés de l'écran */
 padding-right: 15px;
 padding-left: 15px;
+margin-top: 15px;
+margin-bottom: 15px;
 
 /* Et on centre */
 margin-right: auto;
@@ -130,6 +132,25 @@ position: absolute;
 top: 0;
 left: 0;
 }
+
+.carousel-indicators {
+  position: absolute;
+  bottom: -50px;
+  }
+.carousel-control-next {
+  filter: invert(100%);
+  bottom: -130%;
+  right: -15%;
+}
+.carousel-control-prev {
+  filter: invert(100%);
+  bottom: -130%;
+  left: -15%;
+}
+.carousel-indicators li{
+  filter: invert(100%);
+}
+
 
 /* FOOTER */
 .page-footer {

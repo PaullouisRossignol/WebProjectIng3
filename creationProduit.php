@@ -48,10 +48,18 @@
                     $Cat=3;
                     break;
              }
-            if (isset($_FILES['photo'])  && isset($_FILES['vid']))
+                //l'ajout de vidéo n'est pas une obligation
+             if ($_FILES['vid']["name"]!="")
+             {
+                $vidName ="res/". SauvegardeImage($_FILES["vid"]["name"], $_FILES["vid"]["tmp_name"],$_FILES["vid"]["size"]);
+                
+             }
+             else{
+                $vidName='' ;
+             }
+            if (isset($_FILES['photo']) )
             {
-                $photoName = SauvegardeImage($_FILES["photo"]["name"], $_FILES["photo"]["tmp_name"],$_FILES["photo"]["size"]);
-                $vidName = SauvegardeImage($_FILES["vid"]["name"], $_FILES["vid"]["tmp_name"],$_FILES["vid"]["size"]);
+                $photoName = "res/".SauvegardeImage($_FILES["photo"]["name"], $_FILES["photo"]["tmp_name"],$_FILES["photo"]["size"]);
 
             if ($photoName != false || $vidName!= false) {
 
@@ -62,7 +70,7 @@
                 //si c'est un admin qui met un produit en vente, son mail est celui de la société
                 if ($_SESSION["type"]==2)
                 {
-                    $mail="AmazonECE@yahoo.fr";
+                    $mail="amazonece123@gmail.com";
                 }
                 else
                      $mail=$_SESSION["user"];
@@ -82,7 +90,7 @@
                         console.log("New record in users created successfully");
                     </script>
                     <?php
-                     echo "<div class='main-center'><center>". $name . " was created <br> <a href='HomePage.php'>Home Page</a></center></div>";
+                     echo "<div class='main-center'><center>". $name . " a été crée. <br> <a href='HomePage.php'>Home Page</a></center></div>";
                          
                 }
              else
@@ -100,8 +108,8 @@
         }
     }else
     {
-        echo "<div class='main-center'> Erreur a l'upload de la photo </div>";
-        echo $_FILES["photo"]["name"]." & ".$_FILES["vid"]["name"];
+        echo "<div class='main-center'> Erreur a l'upload de la photo ";
+        echo $_FILES["photo"]["name"]." & ".$_FILES["vid"]["name"]."</div>";
     }
    
 

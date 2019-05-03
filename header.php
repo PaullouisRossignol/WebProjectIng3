@@ -8,7 +8,7 @@
 
   <img src="res/logoeceamazon_bisbis.png">  
     <span align="center"><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
-    <INPUT type=submit name=btnG VALUE="Search on this website"></span>
+    <button type="button" class=" btn btn-light btn-sm">Rechercher</button>
   
   <br>
     <div class="navbar">
@@ -26,17 +26,7 @@
       </div> 
 
       <a href="SellProductPage.php">Vendre</a>
-
-      <div class="dropdown">
-        <button class="dropbtn">Admin 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-        <a href="gestVendeur.php">Gérer les vendeurs</a>
-          <a href="AdminPage.php">Gérer les produits</a>
-        </div>
-      </div>
-
+      <a href="gestVendeur.php">Admin</a>
       <a href="PanierPage.php">Panier</a>
       <a href="MyAccount.php">Mon Compte</a>
       <a href="Login.php">Se Connecter</a>

@@ -53,7 +53,7 @@ function ConnectDatabase()
 function SauvegardeImage($fileName, $fileTMP, $fileSize)
 {
     //répertoire de déstination
-    $target_dir = "res/";
+    $target_dir = "";
     $target_file = $target_dir . basename($fileName);
     ?><script>
         console.log(<?php echo "'$target_file'"; ?>);

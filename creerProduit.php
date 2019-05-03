@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -58,7 +59,7 @@
                         <label for="email"> Vidéo </label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input style="font-size: 14px" accept="video/*" type="file" id="vid" name="vid" required />
+                            <input style="font-size: 14px" accept="video/*" type="file" id="vid" name="vid"  />
                         </div>
                     </div>
 
@@ -120,12 +121,12 @@
                                 <br>
                                 <div class="form-check-inline">
                                     <label class="form-check-label" for="radio1">
-                                        <input type="radio" class="form-check-input" id="radio1" name="sexe" value="option1" checked>Homme
+                                        <input type="radio" class="form-check-input" id="radio1" name="sexe" value="0" checked>Homme
                                     </label>
                                 </div>
                                 <div class="form-check-inline">
                                     <label class="form-check-label" for="radio2">
-                                        <input type="radio" class="form-check-input" id="radio2" name="sexe" value="option2">Femme
+                                        <input type="radio" class="form-check-input" id="radio2" name="sexe" value="1">Femme
                                     </label>
                                 </div>
                             </div>

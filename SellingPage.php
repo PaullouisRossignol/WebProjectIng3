@@ -17,7 +17,6 @@
 <!------ HEADER NAVBAR ---------->
 <?php include("header.php"); ?>
 
-
 <!------ CONTAINER BODY ---------->
 <?php
 	include "PhpFunctions.php";
@@ -33,29 +32,52 @@
 ?>
 
 <div class="container">
-  <div id="list_bloc">
-    <?php while ($data = mysqli_fetch_assoc($result)) {  
-      echo "<div class='bloc_produit'>
-              <div class='bloc_sup'>
-                <table>
-                  <tr>
-                    <td><div class='img_bloc'>Image</div></td>
-                    <td valign='top'>
-                      <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
-                      <div class='format_prix'>".$data['Price']." €</div>
-                      <div class='desc'>
-                        ".$data['Descr']."
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>";}
-            //fermer la connection
-            $conn->close();
+  
+   
+    <?php 
+    
+    if(mysqli_num_rows($result)>0)
+    {
+      echo"<div id='list_bloc'>";
+      while ($data = mysqli_fetch_assoc($result)) {  
+        echo "<div class='bloc_produit'>
+                <div class='bloc_sup'>
+                  <table>
+                    <tr>
+                      <td><div class='img_bloc'>Image</div></td>
+                      <td valign='top'>
+                        <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
+                        if($data['TauxPromo']!=0){
+                          echo "<table>
+                          <tr>
+                          <td><div class='format_prix'>".$data['Price']." €</div></td>
+                          <td><div class='format_prix'>-".$data['TauxPromo']."%</div></td>
+                          </tr>
+                          </table>";
+                                
+                        }else{
+                        echo"<div class='format_prix'>".$data['Price']." €</div>";}
+  
+                        echo"<div class='desc'>
+                          ".$data['Descr']."
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>";}
+              echo "</div>";
+              //fermer la connection
+              $conn->close();
+    }
+    else
+    {echo"Aucun produit de ce genre n'est vendu.";}
+    
+    
       ?> 
-  </div>
+  
 </div>
+
 <script type="text/javascript">
     $(document).ready(function() {
             $('.bloc_produit').mouseover(function(){
@@ -69,6 +91,12 @@
               $(this).children().css("background-color", "white");
             });
         });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.header').height($(window).height());
+    });
 </script>
 
 <!------ FOOTER ---------->
