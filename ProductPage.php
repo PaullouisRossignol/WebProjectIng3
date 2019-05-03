@@ -127,7 +127,7 @@
               <?php
               //calcul des valeurs à afficher
               $price_promo = $data['Price'] * (1 - ($data['TauxPromo']) / 100);
-
+                
               //
               if ($price_promo != $data['Price']) {
                 echo "<div id='format_title'><div class=product-title>" . $data['Name'] . "</div></div>
@@ -153,7 +153,7 @@
                     }
                      
                     
-                    ";
+                    
                     echo "</td></tr>
                   </table>
                 </div>
