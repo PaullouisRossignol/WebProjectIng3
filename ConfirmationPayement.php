@@ -68,41 +68,77 @@
                                 {
                                     if ($TypeCard==$row['Type']) 
                                     {
-                                        echo "card type correct <br>";
+                                        //echo "card type correct <br>";
                                         if ($numCard==$row['Card_num']) 
                                         {
-                                            echo "card number correct <br>";
+                                            //echo "card number correct <br>";
                                             if ($nameCard==$row['Name_card']) 
                                             {
-                                                echo "card name correct <br>";
+                                                //echo "card name correct <br> ";
                                                 if ($dateExp==$row['Exp_date']) 
                                                 {
-                                                    echo "card exp date correct <br>";
+                                                   // echo "card exp date correct <br>";
                                                     if ($codeSec==$row['Sec_code']) 
                                                     {
-                                                        echo "code sec correct <br>";
+                                                        //echo "code sec correct <br>";
                                                         $conf_achat=1;
                                                     }
+                                                    else echo "<br>
+                                              <div class='card bg-danger text-white'>
+                                                <div class='card-body'>Code de sécurité de la carte incorrect</div>
+                                              </div> <br> ";
                                                 }
+                                                else echo "<br>
+                                              <div class='card bg-danger text-white'>
+                                                <div class='card-body'>Date d'expiration de la carte incorrecte</div>
+                                              </div> <br> ";
                                             }
+                                            else echo "<br>
+                                              <div class='card bg-danger text-white'>
+                                                <div class='card-body'>Nom figurant sur la carte incorrecte</div>
+                                              </div> <br> ";
                                         }
+                                        else echo "<br>
+                                              <div class='card bg-danger text-white'>
+                                                <div class='card-body'>Numéro de la carte incorrecte</div>
+                                              </div> <br> ";
                                     }
+                                    else echo "<br>
+                                              <div class='card bg-danger text-white'>
+                                                <div class='card-body'>Type de la carte incorrecte</div>
+                                              </div> <br> ";
                                 }
                             } else  echo "<center>
                                             <div>
                                                 Erreur Les infos n'ont pas été trouvés <br>
-                                                <a href='HomePage.html'>Home Page</a>
+                                                <a href='HomePage.php'>Home Page</a>
                                             </div>
                                         </center>";
                     }
 
                     if ($conf_achat==1) 
                     {
-                        echo "<center>
-                                            <div>Félicitation votre achat à été confirmé!<br><a href='HomePage.html'>Home Page</a>
+
+                        echo "
+
+                <div class='main'>
+                    <div class='main-center'>
+                    <center>
+                                            <div>Félicitation votre achat à été confirmé!<br>
+                                            <a href='HomePage.php'>Home Page</a><br>
+                                            <a href='Mail.php'>Recevoir un mail</a>
                                             </div>
-                                        </center>";
+                                        </center></div></div>";
                     }
+                    else
+                        echo"
+                            <div class='main'>
+                            <div class='main-center'>
+                            <h4>Veuillez recommencer l'opération</h4>
+                            <a href='HomePage.php'  class='btn btn-primary btn-block' role='button' >Home Page</a>
+                            </div>
+                            </div>
+                            ";
     $conn->close();
 
     ?>
