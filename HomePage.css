@@ -8,7 +8,6 @@ background-color: rgb(16, 125, 214);
 }
 
 .navbar {
-
 background-color: rgb(16, 125, 214);
 text-align: justify;
 margin-bottom: 0%;
@@ -76,6 +75,8 @@ display: block;
 /* On ajoute une marge sur les cotés de l'écran */
 padding-right: 15px;
 padding-left: 15px;
+margin-top: 15px;
+margin-bottom: 15px;
 
 /* Et on centre */
 margin-right: auto;
@@ -88,16 +89,7 @@ margin-left: auto;
     width: 1170px;
 }
 }
-#promo{
-width: 100%;
-height: 250px;
-background-color: #eeabab;
-}
-#bottom{
-width: 100%;
-height: 250px;
-background-color: #bfc4df;
-}
+
 #text_nav{
 float: right;
 margin-right: 50px;
