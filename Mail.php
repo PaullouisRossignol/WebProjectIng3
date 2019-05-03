@@ -32,7 +32,7 @@
                     }
 
 
-                    $content='Bonjour '.$Nom. $Prenom.' vous recevez ce mail suite à une commande effectuer sur notre site web Eceamazone!';
+                    $content='Bonjour '.$Nom.' '. $Prenom.' vous recevez ce mail suite à une commande effectuer sur notre site web Eceamazone!';
 
 
 
