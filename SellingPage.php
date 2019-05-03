@@ -17,6 +17,7 @@
 <!------ HEADER NAVBAR ---------->
 <?php include("header.php"); ?>
 
+
 <!------ CONTAINER BODY ---------->
 <?php
 	include "PhpFunctions.php";
@@ -40,19 +41,9 @@
                   <tr>
                     <td><div class='img_bloc'>Image</div></td>
                     <td valign='top'>
-                      <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
-                      if($data['TauxPromo']!=0){
-                        echo "<table>
-                        <tr>
-                        <td><div class='format_prix'>".$data['Price']." €</div></td>
-                        <td><div class='format_prix'>-".$data['TauxPromo']."%</div></td>
-                        </tr>
-                        </table>";
-                              
-                      }else{
-                      echo"<div class='format_prix'>".$data['Price']." €</div>";}
-
-                      echo"<div class='desc'>
+                      <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
+                      <div class='format_prix'>".$data['Price']." €</div>
+                      <div class='desc'>
                         ".$data['Descr']."
                       </div>
                     </td>
@@ -65,26 +56,19 @@
       ?> 
   </div>
 </div>
-
 <script type="text/javascript">
     $(document).ready(function() {
             $('.bloc_produit').mouseover(function(){
-              $(this).css("background-color", "#ddd");
-              $(this).children().css("background-color", "#ddd");
-            $('.img_bloc').css("background-color", "white");
+              $('.bloc_produit').css("background-color", "#ddd");
+              $('.bloc_sup').css("background-color", "#ddd");
+              $('.img_bloc').css("background-color", "white");
               
             });
             $('.bloc_produit').mouseout(function(){
-              $(this).css("background-color", "white");
-              $(this).children().css("background-color", "white");
+              $('.bloc_produit').css("background-color", "white");
+              $('.bloc_sup').css("background-color", "white");
             });
         });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.header').height($(window).height());
-    });
 </script>
 
 <!------ FOOTER ---------->
