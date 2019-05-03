@@ -38,7 +38,9 @@
               <div class='bloc_sup'>
                 <table>
                   <tr>
-                    <td><div class='img_bloc'>Image</div></td>
+                    <td><div class='img_bloc'>
+                      <div class='img_bloc'><img src=".$data['Pic_loc']. "alt='Image Produit' width='auto'  height='224px' style=' max-height:299px;max-width:299px'></div>
+                    </div></td>
                     <td valign='top'>
                       <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
                       if($data['TauxPromo']!=0){

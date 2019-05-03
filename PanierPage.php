@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="HomePage.css">
 <link rel="stylesheet" type="text/css" href="PanierPage.css">
+
+
 </head>
 <body>
 
@@ -18,56 +20,78 @@
 <?php include("header.php"); ?>
 
 <!------ CONTAINER BODY ---------->
+
 <?php
-	include "PhpFunctions.php";
+  include "PhpFunctions.php";
 
 	//DATABASE
 	$conn=ConnectDatabase();
-					
+				 $_SESSION['Panier']= array(252525,1234,789456);	
   //si le BDD existe, faire le traitement
   $conn->set_charset('utf8');
   $conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-  $sql = "SELECT * FROM products";
+  $sql = "SELECT * FROM products WHERE ID IN (".implode(',',$_SESSION['Panier']).")";
   $result = $conn->query( $sql);
+
+  if(isset($_GET['ID']))
+  {
+    for($i=0; $i<sizeof($_SESSION['Panier']); $i++){
+      if($_GET['ID']==$_SESSION['Panier'][$i])
+      {
+        unset($_SESSION['Panier'][$i]);
+      }
+    }
+    $sql = "SELECT * FROM products WHERE ID IN (".implode(',',$_SESSION['Panier']).")";
+  $result = $conn->query( $sql);
+  }
+
 ?>
 
 
 <div class="container">
-<h1>Votre Panier</h1>
+  <h1>Votre Panier</h1>
   <div id="list_bloc">
-    <?php while ($data = mysqli_fetch_assoc($result)) { 
+    <?php $total_price=0;
+    $nb_article=0;
+    while ($data = mysqli_fetch_assoc($result)) { 
+      //on récupère le tableau de photo
+      /*$tabPhoto = unserialize($data['Pic_loc']);
+      $tabPhoto[0];*/
+      $nb_article++;
+      $total_price += $data['Price'];
     echo "
     <div class='bloc_produit'>
       <div class='bloc_sup'>
         <table>
           <tr>
             <td>
-              <div class='img_bloc'>Image</div>
+              <div class='img_bloc'><img src=".$data['Pic_loc']." alt='Image Produit' width='auto'  height='224px' style=' max-height:299px;max-width:299px'></div>
             </td>
             <td valign='top'>
-              <div class='format_title'><div class=product-title>".$data['Name']."</div></div>
+              <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
               <div class='format_prix'>".$data['Price']." €</div>
               <div class='desc'>
-                DESCRIPTION
+              ".$data['Descr']."
               </div>
             </td>
             <td>
-              <div id='qty_format'>Quantité<br>x1<br><br><div id='img_trash'><img src='res/icon_trash.png' alt='trash_icon'></div></div>
+              <div id='qty_format'>Quantité<br>x".$data['Qty']."<br><br><div id='img_trash'><a href='PanierPage.php?ID=".$data['ID']."'><img src='res/icon_trash.png' alt='trash_icon'></a></div></div>
             </td>
           </tr>
         </table>
       </div>
     </div>";}
   
-  //fermer la connection
-  $conn->close();
-?>
-</div>
-  <div id="format_btn">
-  <button type='button' class='btn btn-success'>
-    Passer à la commande
-  </button>
-  </div>
+    //fermer la connection
+    $conn->close();
+
+    echo "</div><h2>TOTAL : ".$total_price." €</h2>
+      <div id='format_btn'>
+      <button type='button' class='btn btn-success'>
+        Passer à la commande <br> ".$nb_article." article(s)
+      </button>
+  </div>";
+  ?>
 </div>
   <script type="text/javascript">
     $(document).ready(function () {
