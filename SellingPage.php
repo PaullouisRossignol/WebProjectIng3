@@ -15,42 +15,7 @@
 <body>
 
 <!------ HEADER NAVBAR ---------->
-<div id="header_color">
-  <img src="res/logoeceamazon_bisbis.png">  
-    <span align="center"><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
-    <INPUT type=submit name=btnG VALUE="Search on this website"></span>
-  
-  <br>
-    <div class="navbar">
-      <a href="HomePage.php">Accueil</a>
-      <div class="dropdown">
-        <button class="dropbtn">Categories 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-        <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
-          <a href="SellingPage.php?Cat=1" id="music">Musique</a>
-          <a href="SellingPage.php?Cat=2" id="vetement">V&ecirctement</a>
-          <a href="SellingPage.php?Cat=3" id="sport">Sport & Loisirs</a>
-        </div>
-      </div> 
-
-      <a href="SellProductPage.php">Vendre</a>
-      <div class="dropdown">
-        <button class="dropbtn">Admin 
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="AdminPage.php">Gérer les vendeurs</a>
-          <a href="AdminPage.php">Gérer les produits</a>
-        </div>
-      </div>
-      <a href="PanierPage.php">Panier</a>
-      <a href="MyAccount.php">Mon Compte</a>
-      <a href="Login.php">Se Connecter</a>
-  </div>
-</div>
-
+<?php include("header.php"); ?>
 
 <!------ CONTAINER BODY ---------->
 <?php
@@ -75,9 +40,19 @@
                   <tr>
                     <td><div class='img_bloc'>Image</div></td>
                     <td valign='top'>
-                      <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
-                      <div class='format_prix'>".$data['Price']." €</div>
-                      <div class='desc'>
+                      <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
+                      if($data['TauxPromo']!=0){
+                        echo "<table>
+                        <tr>
+                        <td><div class='format_prix'>".$data['Price']." €</div></td>
+                        <td><div class='format_prix'>-".$data['TauxPromo']."%</div></td>
+                        </tr>
+                        </table>";
+                              
+                      }else{
+                      echo"<div class='format_prix'>".$data['Price']." €</div>";}
+
+                      echo"<div class='desc'>
                         ".$data['Descr']."
                       </div>
                     </td>
@@ -90,6 +65,22 @@
       ?> 
   </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+            $('.bloc_produit').mouseover(function(){
+              $(this).css("background-color", "#ddd");
+              $(this).children().css("background-color", "#ddd");
+            $('.img_bloc').css("background-color", "white");
+              
+            });
+            $('.bloc_produit').mouseout(function(){
+              $(this).css("background-color", "white");
+              $(this).children().css("background-color", "white");
+            });
+        });
+</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('.header').height($(window).height());

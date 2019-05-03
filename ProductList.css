@@ -36,6 +36,11 @@ background-color: white;
     font-weight: bold;
     color: rgb(255, 81, 0);
 }
+.tauxpromo{
+    margin-left: 15px;
+    font-size: 40px;
+    color: red;
+}
 #format_btn{
     position: relative;
     margin-left: 50px;
