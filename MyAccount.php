@@ -50,6 +50,7 @@
                 <center>
                 <a class='underlineHover' href='Login.php'>Vous connecter</a>
                 </center>
+
              <br>  <br> <br>
             
               ";
@@ -187,6 +188,15 @@
             </div>
       </form><br>
       </center>
+
+      <center>
+      <form action='Payement.php' method='post'>
+             <button type='submit' class='btn btn-info'>Payement</button>
+
+            </div>
+      </form><br>
+      </center>
+
       ";
     }
 
