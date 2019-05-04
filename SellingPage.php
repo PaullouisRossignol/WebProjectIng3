@@ -21,6 +21,20 @@
 <?php
 	include "PhpFunctions.php";
 
+
+  //Php functions 
+
+  function switchSex($sex){
+    switch ($sex) {
+              case 0:
+                $sexe = "Homme";
+                break;
+              case 1:
+                $sexe = "Femme";
+                break;
+            }
+            return $sexe;
+  }
 	//DATABASE
 	$conn=ConnectDatabase();
 					
@@ -36,41 +50,67 @@
        
        if($_GET['Cat']==2)
        {
-        $sql = "SELECT * FROM Nameproducts in = (
-          SELECT Distinct Nameproducts WHERE Cat=".$_GET['Cat'].")";
-        $result = $conn->query( $sql);
-         while ($data = mysqli_fetch_assoc($result)) {  
-          $tabPhoto = unserialize($data['Pic_loc']);
-         $string='chooseClothes.php';
-         echo "<div class='bloc_produit'>
-              <div class='bloc_sup'>
-                <table>
-                  <tr>
-                    <td>
-                      <div class='img_bloc' > <center><img src='" . $tabPhoto[0] . "' alt='Image Produit' width='auto'  height='auto' style=' max-height:200px;max-width:200px; ' ></center>
-                    </div></td>
-                    <td valign='top'>
-                      <div class='format_title'><div class=product-title><a href='".$string."?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
-                      if($data['TauxPromo']!=0){
-                        echo "<table>
-                        <tr>
-                        <td><div class='format_prix'>".$data['Price']." €</div></td>
-                        <td><div class='format_prix'>-".$data['TauxPromo']."%</div></td>
-                        </tr>
-                        </table>";
-                              
-                      }else{
-                      echo"<div class='format_prix'>".$data['Price']." €</div>";}
+        
+        $string='chooseClothes.php';
 
-                      echo"<div class='desc'>
-                        ".$data['Descr']."
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>";}
-       }
+
+        $sql = "SELECT Distinct Name	 FROM products WHERE Cat=".$_GET['Cat'];
+        $result = $conn->query( $sql);
+         while ($data = mysqli_fetch_assoc($result)) {
+           $array[]=$data['Name'];
+          
+        }
+        foreach ($array as $value) {
+          $couleurDisp="";
+          $TailleDisp="";
+          $SexDisp="";
+
+        $sql = "SELECT Distinct Color FROM products WHERE Name='".$value."'";
+        $result = $conn->query( $sql);
+         while ($data = mysqli_fetch_assoc($result)) {
+          $couleurDisp.=$data['Color']." | ";
+         }
+         $sql = "SELECT Distinct Size FROM products WHERE Name='".$value."'";
+         $result = $conn->query( $sql);
+          while ($data = mysqli_fetch_assoc($result)) {
+            $TailleDisp.=$data['Size']." | ";
+          }
+          $sql = "SELECT Distinct Sex FROM products WHERE Name='".$value."'";
+         $result = $conn->query( $sql);
+          while ($data = mysqli_fetch_assoc($result)) {
+            $SexDisp.=switchSex($data['Sex'])." | ";
+            
+          }
+          
+          
+         
+         
+          echo "<div class='bloc_produit'>
+          <div class='bloc_sup'>
+            <table>
+              <tr>
+                <td valign='top'>
+                  <div class='format_title'><div class=product-title><a href='".$string."?name=".$value."'>".$value."</a></div>";
+                 
+
+                echo"</td>
+              </tr> <tr>
+              <td><b>Couleurs disponibles </b>= ".$couleurDisp."
+               </td></tr> <tr>
+               <td><b>Taille disponibles</b>    = ".$TailleDisp."
+               </td></tr> <tr>
+               <td><b>Morphologie disponibles</b>    = ".$SexDisp."
+               </td></tr> 
+            </table>
+          </div>
+        </div>";}
+
+         }
+
+         
+        
+        
+       
        else
        {
         $sql = "SELECT * FROM products WHERE Cat=".$_GET['Cat'];
