@@ -40,6 +40,7 @@
       if($_GET['ID']==$_SESSION['Panier'][$i])
       {
         unset($_SESSION['Panier'][$i]);
+        break;
       }
     }
     $_SESSION['Panier'] = array_values($_SESSION['Panier']);
