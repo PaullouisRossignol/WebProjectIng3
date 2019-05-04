@@ -27,22 +27,30 @@
   //si le BDD existe, faire le traitement
   $conn->set_charset('utf8');
   $conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-  $sql = "SELECT * FROM products WHERE Cat=".$_GET['Cat'];
-  $result = $conn->query( $sql);
+ 
 ?>
 
 <div class="container">
   <div id="list_bloc">
-    <?php while ($data = mysqli_fetch_assoc($result)) {  
-      echo "<div class='bloc_produit'>
+    <?php 
+       
+       if($_GET['Cat']==2)
+       {
+        $sql = "SELECT * FROM Nameproducts in = (
+          SELECT Distinct Nameproducts WHERE Cat=".$_GET['Cat'].")";
+        $result = $conn->query( $sql);
+         while ($data = mysqli_fetch_assoc($result)) {  
+          $tabPhoto = unserialize($data['Pic_loc']);
+         $string='chooseClothes.php';
+         echo "<div class='bloc_produit'>
               <div class='bloc_sup'>
                 <table>
                   <tr>
-                    <td><div class='img_bloc'>
-                      <div class='img_bloc'><img src=".$data['Pic_loc']. "alt='Image Produit' width='auto'  height='224px' style=' max-height:299px;max-width:299px'></div>
+                    <td>
+                      <div class='img_bloc' > <center><img src='" . $tabPhoto[0] . "' alt='Image Produit' width='auto'  height='auto' style=' max-height:200px;max-width:200px; ' ></center>
                     </div></td>
                     <td valign='top'>
-                      <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
+                      <div class='format_title'><div class=product-title><a href='".$string."?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
                       if($data['TauxPromo']!=0){
                         echo "<table>
                         <tr>
@@ -62,6 +70,44 @@
                 </table>
               </div>
             </div>";}
+       }
+       else
+       {
+        $sql = "SELECT * FROM products WHERE Cat=".$_GET['Cat'];
+        $result = $conn->query( $sql);
+        while ($data = mysqli_fetch_assoc($result)) {  
+          $tabPhoto = unserialize($data['Pic_loc']);
+        $string='ProductPage.php';
+        echo "<div class='bloc_produit'>
+              <div class='bloc_sup'>
+                <table>
+                  <tr>
+                    <td>
+                      <div class='img_bloc' > <center><img src='" . $tabPhoto[0] . "' alt='Image Produit' width='auto'  height='auto' style=' max-height:200px;max-width:200px; ' ></center>
+                    </div></td>
+                    <td valign='top'>
+                      <div class='format_title'><div class=product-title><a href='".$string."?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
+                      if($data['TauxPromo']!=0){
+                        echo "<table>
+                        <tr>
+                        <td><div class='format_prix'>".$data['Price']." €</div></td>
+                        <td><div class='format_prix'>-".$data['TauxPromo']."%</div></td>
+                        </tr>
+                        </table>";
+                              
+                      }else{
+                      echo"<div class='format_prix'>".$data['Price']." €</div>";}
+
+                      echo"<div class='desc'>
+                        ".$data['Descr']."
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>";}
+       }
+      
             //fermer la connection
             $conn->close();
       ?> 

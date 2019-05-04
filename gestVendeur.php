@@ -80,7 +80,7 @@
                     echo "</table>";
 
                     echo "<form  method='POST' action='creerVendeur.php'>
-        <button type='submit' class='btn btn-success' onclick>Ajouter un utilisateur</button></form> <br>";
+        <button type='submit' class='btn btn-success' >Ajouter un utilisateur</button></form> <br>";
                 } else
                     echo "<center><div>Il n'y a pas de compte dans la base de données<br><br><a href='HomePage.php'>Home Page</a></div></center>";
 

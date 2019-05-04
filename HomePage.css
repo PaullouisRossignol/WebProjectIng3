@@ -123,6 +123,25 @@ top: 0;
 left: 0;
 }
 
+.carousel-indicators {
+  position: absolute;
+  bottom: -50px;
+  }
+.carousel-control-next {
+  filter: invert(100%);
+  bottom: -130%;
+  right: -15%;
+}
+.carousel-control-prev {
+  filter: invert(100%);
+  bottom: -130%;
+  left: -15%;
+}
+.carousel-indicators li{
+  filter: invert(100%);
+}
+
+
 /* FOOTER */
 .page-footer {
 background-color: #222;
