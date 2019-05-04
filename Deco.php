@@ -1,7 +1,9 @@
 
 <?php 
 echo"<link href='creerCompte.css' rel='stylesheet' id='bootstrap-css'>";
-session_start();
+if (session_id() == "") {
+	session_start();
+}
 session_unset(); 
 
 
