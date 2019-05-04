@@ -18,18 +18,48 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-        <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
+          <a href="SellingPage.php?Cat=0" id="livres">Livres</a>
           <a href="SellingPage.php?Cat=1" id="music">Musique</a>
           <a href="SellingPage.php?Cat=2" id="vetement">V&ecirctement</a>
           <a href="SellingPage.php?Cat=3" id="sport">Sport & Loisirs</a>
         </div>
       </div> 
-
-      <a href="SellProductPage.php">Vendre</a>
-      <a href="gestVendeur.php">Admin</a>
-      <a href="PanierPage.php">Panier</a>
       <a href="MyAccount.php">Mon Compte</a>
-      <a href="Login.php">Se Connecter</a>
+      
+
+
+      <?php
+
+      	session_start();
+		
+		
+		if(isset($_SESSION["user"]))
+		{
+			if ($_SESSION["type"]==0) {
+				echo"<a href='PanierPage.php'>Panier</a>";
+			
+			}
+			else
+			{
+				if ($_SESSION["type"]==1)
+			      {
+			      	echo"<a href='SellProductPage.php'>Vendre</a>";
+			      }
+			    else
+			    {
+			    	if ($_SESSION["type"]==2)
+			    	{
+			    		echo"<a href='SellProductPage.php'>Vendre</a>";
+			    		echo"<a href='gestVendeur.php'>Admin</a>";
+			    	}
+			    }
+	      	}
+	    }
+	    else
+	    	echo"<a href='Login.php'>Se Connecter</a>";
+
+      ?>
+
       
   </div>
 </div>

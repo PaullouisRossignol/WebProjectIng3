@@ -21,6 +21,7 @@
     <div class="main">
         <?php
         //connection a la base de données
+        require_once('PHPMailer/PHPMailerAutoload.php');
         include 'PhpFunctions.php';
         $conf_achat = 0;
         $conn = ConnectDatabase();
@@ -118,17 +119,129 @@
 
                     if ($conf_achat==1) 
                     {
+                        //L'achat est confirmé 
 
-                        echo "
-
-                <div class='main'>
-                    <div class='main-center'>
-                    <center>
+                        echo 
+                        "
+                                <div class='main'>
+                                    <div class='main-center'>
+                                        <center>
                                             <div>Félicitation votre achat à été confirmé!<br>
                                             <a href='HomePage.php'>Home Page</a><br>
-                                            <a href='Mail.php'>Recevoir un mail</a>
                                             </div>
-                                        </center></div></div>";
+                                        </center>
+                                    </div>
+                                </div>
+                        ";
+
+                        //diminution de la quantité dans la base de donnée
+                        if(isset($_SESSION["Panier"]))
+                        {
+                            if (sizeof($_SESSION["Panier"])!=0) 
+                            {
+                                echo "<center>Vos produits : <br> ";
+                                for($i=0;$i<sizeof($_SESSION["Panier"]);$i++)
+                                {
+                                    $sql ="SELECT * FROM products WHERE ID = '".$_SESSION["Panier"][$i]."'";
+                                    $result = $conn->query($sql);
+                                        if (isset($result->num_rows)) 
+                                        {
+                                            if ($result->num_rows > 0) 
+                                            {
+
+                                                while ($row = $result->fetch_assoc()) 
+                                                {
+                                                    echo $row["Name"]."<br>";
+                                                    $qteprc=$row["Qty"]-1;
+                                                    $sql2 = 'UPDATE products SET Qty=';
+                                                    $sql2.=$qteprc;
+                                                    $sql2.=' WHERE ID=';
+                                                    $sql2.=$_SESSION["Panier"][$i];
+                                                    
+                                                    if($conn->query($sql2))
+                                                    {
+                                                        echo"Modification BDD OK ;)"; 
+                                                        unset($_SESSION["Panier"]);
+                                                    }
+                                                    else
+                                                    {
+                                                        echo"Modification BDD PAS OK :C"; 
+                                                    }
+                                                }
+                                            }
+                                            else
+                                                echo "Aucun résultat pour les id dans le Panier";
+                                        }      
+                                }
+                            }
+                            else
+                            {
+                                echo "Le Panier est vide";
+                            }
+                        }
+                        else
+                        {
+                            echo "Le Panier n'a pas été initialisé";
+                        }
+
+                        //envois d'un mail
+
+                        $adress=$_SESSION["user"];
+                        
+                        $prix=0;
+                        
+                        if (isset($_SESSION["total_price"])) 
+                        {
+                            $prix=$_SESSION["total_price"];
+                        }
+                        
+                        $sql="SELECT * FROM clients WHERE Email = '".$_SESSION["user"]."'";
+                        $result = $conn->query($sql);
+
+                            if (isset($result->num_rows)) 
+                            {
+                                if ($result->num_rows > 0) 
+                                    {
+                                      while ($row = $result->fetch_assoc()) 
+                                        {
+                                            $Nom=$row['Name'];
+                                            $Prenom=$row['Surname'];
+                                            $num=$row['Card_num'];
+                                        }
+                                    } else  echo "<center>
+                                                        <div>
+                                                            Erreur La carte n'a pas été trouvée <br>
+                                                            <a href='HomePage.php'>Home Page</a>
+                                                        </div>
+                                                    </center>";
+                            }
+
+
+                            $content=
+                            '<body> <center><h1>Merci de Votre achat!</h1>
+                            <p> Bonjour '. $Prenom.' '.$Nom.' vous recevez ce mail suite a une commande d un montant de : '.$prix.' effectuer sur notre site web Eceamazone!</p>
+                            <p>Retrouvez votre compte <a href="http://localhost/maisquoi/MyAccount.php">ICI</a>. </center> </body>';
+
+
+
+
+                         $mail = new PHPMailer();
+                         $mail->isSMTP();
+                         $mail->SMTPAuth = true;
+                         $mail->SMTPSecure = 'ssl';
+                         $mail->Host = 'smtp.gmail.com';
+                         $mail->Port = '465';
+                         $mail->isHTML();
+                         $mail->Username = 'amazonece123@gmail.com';
+                         $mail->Password = 'rntM6GP5TV96tA6x';
+                         $mail->SetFrom('amazonece123@gmail.com');
+                         $mail->Subject = 'Confirmation de payement';
+                         $mail->Body = $content;
+                         $mail->AddAddress($adress);
+
+                         $mail->Send();
+
+
                     }
                     else
                         echo"
@@ -139,6 +252,9 @@
                             </div>
                             </div>
                             ";
+
+
+
     $conn->close();
 
     ?>
