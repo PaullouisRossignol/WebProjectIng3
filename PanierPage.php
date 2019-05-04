@@ -56,7 +56,10 @@
   <?php
   if(sizeof($_SESSION['Panier'])==0)
   {
-    echo "Votre panier est vide.<a href='HomePage.php'>Accéder à la boutique.</a>";
+
+    echo "<div class='card bg-danger text-white'>
+            <div class='card-body'>Votre panier est vide! <a href='HomePage.php'>Accéder à la boutique.</a></div>
+          </div>";
   }else{
   echo "<div id='list_bloc'>"; 
  
