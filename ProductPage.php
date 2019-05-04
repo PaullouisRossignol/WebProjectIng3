@@ -66,6 +66,16 @@
 
 <!------ CONTAINER BODY ---------->
 
+<?php
+//Si on a submit (ajouter au panier)
+if(isset($_POST['submit']))
+{
+  //Ajout de l'ID dans le Panier
+  sleep(4);
+}
+?>
+
+
 <!-- Mise en place de la connexion et requete SQL -->
 <?php
 					include "PhpFunctions.php";
@@ -79,16 +89,7 @@
 					$sql = "SELECT * FROM products WHERE ID=".$_GET['Id'];
           $result = $conn->query( $sql);
 ?>
-<script>
-    console.log(<?php echo "'".$_GET['Id']."'"; ?>);
-    console.log('<?php
-    if (isset($_SESSION['Panier']))
-    {
-      print_r( $_SESSION['Panier']); 
-    } 
-    ?>');
 
-</script>
 <div class="container">
   <div id="bloc_sup">
     <table>
@@ -104,13 +105,19 @@
                       echo "<div id='format_title'><div class=product-title>".$data['Name']."</div></div>
                       <div id='format_prix'>".$price_promo." €</div>";
                       }
-                    echo "<div id='format_stock'>In Stock</div>
-                    <div id='format_btn'><div class='btn-group cart'>
-                    <button type='button' class='btn btn-success' id='addToCart' onclick='addToCart()'>
-                        Ajouter au panier
-                    </button>
-                    </div></div>
-        </tr>
+                    echo "<div id='format_stock'>In Stock</div>";
+
+                    if(!isset($_SESSION['type'])|| $_SESSION['type']==0)
+                    {
+                      echo "<form action=''>
+                        <div id='format_btn'><div class='btn-group cart'>
+                          <button type='submit' class='btn btn-success' id='addToCart' onclick='addToCart()'>
+                              Ajouter au panier
+                          </button>
+                        </div></div>
+                      </form>";
+                    }
+        echo "</tr>
     </table>
   </div>
     <br><br><div id='desc'><h2>Description</h2><br>
@@ -128,19 +135,6 @@
 //fermer la connection
 $conn->close();?>
 
-<?php
- 
- if(isset($_GET["Ajout"])&& $_GET["Ajout"]==1)
- {
-   $_SESSION["Panier"][]=$_GET["Id"];
-   ?>
-   <script>
-   console.log(<?php echo "'".$_GET['Id']."'"; ?>);
-
-   </script>
-   <?php
- }
-?>
 <!------ FOOTER ---------->
 <footer class="page-footer">
   <div class="container">

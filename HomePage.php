@@ -33,36 +33,39 @@
   $result = $conn->query( $sql);
   ?>
 
-<h1>PROMOTION ET VENTES FLASH</h1>
+<!-------- PROMOTION --------->
+
+<div id="format_text">
+  <h1>PROMOTION ET VENTES FLASH</h1>
+</div>
 <div id="promo">
   <table>
     <tr>
       <?php
-      while ($data = mysqli_fetch_assoc($result)) {  
+      while ($data = mysqli_fetch_assoc($result)) {
+        //on récupère le tableau de photo
+      $tabPhoto = unserialize($data['Pic_loc']);
+      $tabPhoto[0]; 
           echo "
           <td>
             <div id='bloc_produit'>
               <div id='img_product'>
-                Image produit
+                <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
               </div>
               <table>
-              <tr>
-                <td>
-                  <a href='ProductPage.php?Id=".$data['ID']."'><div id='format_title'>".$data['Name']."</div></a>
-                </td>
-                <td>
-                  <div id='format_promo'>
-                    PROMO
-                  </div>
-                  -".$data['TauxPromo']."%
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div id='format_desc'>".$data['Descr']."</div>
-                </td>
-              </tr>
+                <tr>
+                  <td>
+                    <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
+                  </td>
+                  <td>
+                    <div id='format_promo'>
+                      PROMO
+                    </div>
+                    -".$data['TauxPromo']."%
+                  </td>
+                </tr>
               </table>
+              <div id='format_desc'>".$data['Descr']."</div>
             </div>
           </td>";
         }
@@ -71,26 +74,130 @@
   </table>
 </div>
 
-<h1>BEST SELLER</h1>
+<!-------- BEST SELLER --------->
+<?php 
+  $best_seller=array(252539,252537,252532,252535);
+  $sql_livre = "SELECT * FROM products WHERE ID=$best_seller[0]";
+  $sql_music = "SELECT * FROM products WHERE ID=$best_seller[1]";
+  $sql_vet = "SELECT * FROM products WHERE ID=$best_seller[2]";
+  $sql_sport = "SELECT * FROM products WHERE ID=$best_seller[3]";
+
+  $result_livre = $conn->query( $sql_livre);
+  $result_music = $conn->query( $sql_music);
+  $result_vet = $conn->query( $sql_vet);
+  $result_sport = $conn->query( $sql_sport);
+?>
 <div id="bottom">
+  <h1>BEST SELLER</h1>
   <table>
     <tr>
-      <?php
-        for($i=0; $i<4; $i++)
-        {
-          echo "
-          <td>
-            <div id='bloc_produit'>
-            <div id='img_product'>
-            Image produit
+      <td>
+        <div id="bloc_categorie" style="background-color:blue;">
+        <div id="format_categorie"><a href="SellingPage.php?Cat=0">LIVRES</a></div>
+          <div id="bloc_produit">
+          <?php
+            while ($data = mysqli_fetch_assoc($result_livre)) {
+              echo "<div id='img_product'>
+              <div class='img_bloc'>IMAGE</div>
             </div>
-              <div id='format_description'>Description</div>
+            <table>
+              <tr>
+                <td>
+                  <div id='format_title'>".$data['Name']."</div>
+                </td>
+                <td>
+                  <div id='format_bestseller'>
+                    BEST SELLER
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div id='format_desc'>".$data['Descr']."</div>
+          </div>";}?>
+        </div>
+      </td>
+      <td>
+        <div id="bloc_categorie" style="background-color:red;">
+        <div id="format_categorie"><a href="SellingPage.php?Cat=1">MUSIQUE</a></div>
+          <div id="bloc_produit">
+            <div id="img_product">
+              <div class="img_bloc">IMAGE</div>
             </div>
-          </td>";
-        }
-      ?>
+            <table>
+              <tr>
+                <td>
+                  <div id='format_title'>NOM</div>
+                </td>
+                <td>
+                  <div id='format_bestseller'>
+                    BEST SELLER
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div id='format_desc'>Description</div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div id="bloc_categorie" style="background-color:green;">
+        <div id="format_categorie"><a href="SellingPage.php?Cat=2">VÊTEMENTS</a></div>
+          <div id="bloc_produit">
+            <div id="img_product">
+              <div class="img_bloc">IMAGE</div>
+            </div>
+            <table>
+              <tr>
+                <td>
+                  <div id='format_title'>NOM</div>
+                </td>
+                <td>
+                  <div id='format_bestseller'>
+                    BEST SELLER
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div id='format_desc'>Description</div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div id="bloc_categorie"style="background-color:yellow;">
+        <div id="format_categorie"><a href="SellingPage.php?Cat=3">SPORT & LOISIRS</a></div>
+          <div id="bloc_produit">
+            <div id="img_product">
+              <div class="img_bloc">IMAGE</div>
+            </div>
+            <table>
+              <tr>
+                <td>
+                  <div id='format_title'>NOM</div>
+                </td>
+                <td>
+                  <div id='format_bestseller'>
+                    BEST SELLER
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div id='format_desc'>Description</div>
+          </div>
+        </div>
+      </td>
     </tr>
   </table>
+      
+
+
+
+
+
+    <?php
+    /*$array_flash= array(252539,252542,252534);
+    $sql_flash = "SELECT * FROM products WHERE ID IN (".implode(',',$array_flash).")";
+    $result = $conn->query( $sql_flash);*/
+    ?>
 </div>
 
 
