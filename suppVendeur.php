@@ -34,13 +34,13 @@
                     
                         } else {
                         ?><script>
-                    console.log(<?php echo '"Problème a la suppression dans la table des produits avec l erreur: "' . $conn->error; ?>);
+                    console.log(<?php echo '"Problème a la suppression dans la table des produits avec l erreur: ' . $conn->error.'"'; ?>);
                 </script> <?php
                     }
 
                 } else {
                     ?><script>
-                console.log(<?php echo '"Problème a la suppression dans la table des users avec l erreur: "' . $conn->error; ?>);
+                console.log(<?php echo '"Problème a la suppression dans la table des users avec l erreur: ' . $conn->error.'"'; ?>);
             </script> <?php
                 }
             } 

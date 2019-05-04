@@ -115,7 +115,7 @@
                            
     }
 
-    if (isset($_FILES["photo"]) && $_FILES["photo"]!= ""){
+    if (isset($_FILES["photo"]) && $_FILES["photo"]["name"]!= ""){
 
         //on récupère les photos déjà existantes
         $sql = "SELECT Pic_loc FROM products WHERE ID=" . $Id;
@@ -128,6 +128,17 @@
         $tabPhoto=unserialize($tab);
         //on sauvegarde la nouvelle image dans le dossier
         $photoName = SauvegardeImage($_FILES["photo"]["name"], $_FILES["photo"]["tmp_name"],$_FILES["photo"]["size"]);
+        ?>
+            <script>
+                console.log(<?php echo "'".gettype($photoName)."'";?>);
+            </script>
+            <?php
+        if (gettype($photoName)=='boolean')
+        {
+            echo "<div style='margin-left:280px'>Image non prise en charge,<br> veuillez en choisir une autre svp.</div>";
+        }
+        else
+        {
         //on ajoute la nouvelle image au tableau
         $tabPhoto[]=$photoName;
         //on repasse le tableau sous forme de string
@@ -140,13 +151,22 @@
                 console.log("Picture has been updated");
             </script>
             <?php
+            }
         }
+        
+        
                            
     }
 
     //on récupère les données pour les afficher
     $sql = "SELECT * FROM products WHERE ID=" . $Id;
     $result = $conn->query($sql);
+    while ($data = mysqli_fetch_assoc($result)) {
+    //on récupère le tableau de photo
+    $tabPhoto = unserialize($data['Pic_loc']);
+    $sizeTab = sizeof($tabPhoto);
+    //on récupère les autres données
+    $loc_Vid = $data['Vid_link'];
     ?>
 
     <!------ CONTAINER BODY ---------->
@@ -156,7 +176,69 @@
     <div class="container" style="margin-top:50px">
         <div class='row'>
             <div class="col-4">
-                <div id="img_bloc">Image</div>
+                <div id="img_bloc">
+
+<!-- CAROUSEL -->
+        <div id="slider" style="top: 50%; transform: translateY(-50%);  " class="carousel slide" data-ride="carousel">
+
+                <?php  
+                
+                // Indicateurs
+
+                echo "<ul class='carousel-indicators' >
+                <li data-target='#slider' data-slide-to='0' class='active'></li>";
+              $num = 1;
+              for ($i = 0; $i < $sizeTab - 1; $i++) {
+                echo " <li data-target='#slider' data-slide-to='" . ($i + 1) . "'> </li>";
+
+                $num = $i + 1;
+              }
+              //si il y a bien une vidéo d'enregistrer on affiche un marqueur de plus
+              if ($loc_Vid != "") {
+                echo " <li data-target='#slider' data-slide-to=' " . ($num + 1) . " '> </li>";
+              }
+              echo '</ul>';
+
+              // The slideshow
+              echo '<div class="carousel-inner" >
+                      <div class="carousel-item active"><center>
+                      <img src="' . $tabPhoto[0] . '" alt="Image Produit" width="auto"  height="224px" style=" max-height:299px;max-width:299px">
+                      </center></div>
+          ';
+              for ($i = 0; $i < $sizeTab - 1; $i++) {
+                echo '<div class="carousel-item">
+                <center><img src="' . $tabPhoto[$i + 1] . '"  width="auto" height="224px" style=" max-height:299px;max-width:299px " alt="Image Produit"></center>
+                </div>';
+              }
+              if ($loc_Vid != "") {
+                echo ' <div class="carousel-item">
+                <div class="embed-responsive embed-responsive-4by3">
+                  <iframe class="embed-responsive-item" src="' . $loc_Vid . '" width="auto" height="224px" style=" max-height:299px;max-width:299px ">
+                  </iframe>
+                </div>
+              </div>';
+              }
+              echo '
+              </div>';
+              ?>
+
+              <!-- Left and right controls -->
+              <a class="carousel-control-prev" href="#slider" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-control-next" href="#slider" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+
+            </div></div>
+
+<!-- FIN DU CAROUSEL -->
+                
+                
+                
+                
+                
+                
                 <br>
                 Ajouter une photo
                 <form enctype="multipart/form-data" method="POST" action="">
@@ -167,7 +249,7 @@
                 </form>
             </div>
             <div class="col-4"> 
-                <?php while ($data = mysqli_fetch_assoc($result)) {
+                <?php 
                             echo " <form method='POST' action=''>
                                         <input type='hidden' id='custId' name='Id' value='".$Id."'> 
                                         <div class='form-group-inline'>
@@ -216,7 +298,7 @@
                                 </form>
 
                                     </div>
-</div>";
+</div></div>";
                                 }
                                 //fermer la connection
 

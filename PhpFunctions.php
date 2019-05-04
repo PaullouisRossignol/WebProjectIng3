@@ -3,7 +3,10 @@
 //connect to the database after checking It exists with his tables
 function ConnectDatabase()
 {
-    session_start();
+    if(session_id() == "")
+    {
+        session_start();
+    }
 
     //declaration variables
     $servername = "localhost";
@@ -55,6 +58,7 @@ function SauvegardeImage($fileName, $fileTMP, $fileSize)
     //répertoire de déstination
     $target_dir = "res/";
     $target_file = $target_dir . basename($fileName);
+    $return=false;
     ?><script>
         console.log(<?php echo "'$target_file'"; ?>);
     </script>
@@ -73,6 +77,7 @@ function SauvegardeImage($fileName, $fileTMP, $fileSize)
         </script>
         <?php
         return $target_file;
+
         $uploadOk = 0;
     }
 
@@ -83,12 +88,12 @@ function SauvegardeImage($fileName, $fileTMP, $fileSize)
             console.log("UploadOk=0");
         </script>
         <?php
-        return false;
+        $return= false;
 
         // le poid de l'image
         if ($fileSize > 500000) {
 
-            return true;
+            $return= true;
             $uploadOk = 0;
         }
 
@@ -102,16 +107,20 @@ function SauvegardeImage($fileName, $fileTMP, $fileSize)
                 console.log("Image ajoutée avec succès.");
             </script>
         <?php
+            $return= $target_file;
+            return $target_file;
+
 
     } else {
         ?><script>
                 console.log("Probleme a l'enregistrement de l'image");
             </script>
             <?php
-            return false;
+           $return= false;
         }
     }
-    return $target_file;
+
+    return $return;
 }
 
 

@@ -43,7 +43,7 @@
                         <label for="name"> Nom</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Entrer votre nom" required />
+                            <input type="text" class="form-control" name="name" id="name" placeholder="nom" required />
                         </div>
                     </div>
 

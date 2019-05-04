@@ -14,18 +14,19 @@
   <link rel="stylesheet" type="text/css" href="ProductPageBis.css">
 
   <style>
-  
-  
+
+
   </style>
   <script>
     function addToCart() {
-      document.location.href = "ProductPage.php?Id=" + <?php echo $_GET['Id']; ?> + "&Ajout=1";
+      document.location.href = "ProductPage.php?Id=" + <?php echo $Id; ?> + "&Ajout=1";
     }
+    
   </script>
+   
 </head>
+
 <body>
-
-
 
   <!------ HEADER NAVBAR ---------->
   <?php include("header.php"); ?>
@@ -39,102 +40,132 @@
   //DATABASE
   $conn = ConnectDatabase();
 
+
+  //Php functions 
+
+  function switchSex($sex){
+    switch ($sex) {
+              case 0:
+                $sexe = "Homme";
+                break;
+              case 1:
+                $sexe = "Femme";
+                break;
+            }
+            return $sexe;
+  }
+
+
   //si le BDD existe, faire le traitement
+
+  
   $conn->set_charset('utf8');
   $conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
-  $sql = "SELECT * FROM products WHERE ID=" . $_GET['Id'];
+  //requete en fonction des formulaires envoyés
+
+   //methode Get ou Post
+   if(isset($_GET["Id"]))
+   {
+     $Id=$_GET['Id'];
+   }
+   if(isset($_POST["Id"]))
+   {
+     $Id=$_POST['Id'];
+   }
+  
+  $sql = "SELECT * FROM products WHERE ID=" . $Id;
   $result = $conn->query($sql);
   ?>
-  <script>
-    console.log(<?php echo "'" . $_GET['Id'] . "'"; ?>);
-    console.log('<?php
-                  if (isset($_SESSION['Panier'])) {
-                    print_r($_SESSION['Panier']);
-                  }
-                  ?>');
-  </script>
+  
   <div class="container">
     <div id="bloc_sup">
       <table>
         <tr>
           <td>
-            <div id="img_bloc" >
-              <div id="slider"   style="top: 50%; transform: translateY(-50%);  " class="carousel slide" data-ride="carousel">
+            <div id="img_bloc">
+              <div id="slider" style="top: 50%; transform: translateY(-50%);  " class="carousel slide" data-ride="carousel">
 
-                <!-- Le carousel -->
+<!-- CAROUSEL -->
                 <?php while ($data = mysqli_fetch_assoc($result)) {
                   //on récupère le tableau de photo
                   $tabPhoto = unserialize($data['Pic_loc']);
                   $sizeTab = sizeof($tabPhoto);
-                  $loc_Vid=$data['Vid_link'];
+                  //on récupère les autres données
+                  $loc_Vid = $data['Vid_link'];
+                  $name=$data['Name'];
+                  $color=$data['Color'];
+                  $desc=$data['Descr'];
+                  $size=$data['Size'];
+                  $cat=$data['Cat'];
+                  $sexePr= switchSex($data['Sex']);
+                  // Indicateurs
 
-                  // Indicators
-
-                  echo "<ul class='carousel-indicators'>
+                  echo "<ul class='carousel-indicators' style='position: absolute;bottom: -50px;'>
                     <li data-target='#slider' data-slide-to='0' class='active'></li>";
-                    $num=1;
-                  for ($i = 0; $i < $sizeTab-1 ; $i++) {
+                  $num = 1;
+                  for ($i = 0; $i < $sizeTab - 1; $i++) {
                     echo " <li data-target='#slider' data-slide-to='" . ($i + 1) . "'> </li>";
 
-                    $num=$i+1;
+                    $num = $i + 1;
                   }
                   //si il y a bien une vidéo d'enregistrer on affiche un marqueur de plus
-                  if($loc_Vid!="")
-                  {
-                    echo " <li data-target='#slider' data-slide-to=' " . ($num+1) . " '> </li>";
+                  if ($loc_Vid != "") {
+                    echo " <li data-target='#slider' data-slide-to=' " . ($num + 1) . " '> </li>";
                   }
                   echo '</ul>';
 
                   // The slideshow
                   echo '<div class="carousel-inner" >
-                          <div class="carousel-item active">
+                          <div class="carousel-item active"><center>
                           <img src="' . $tabPhoto[0] . '" alt="Image Produit" width="auto"  height="224px" style=" max-height:299px;max-width:299px">
-                          </div>
+                          </center></div>
               ';
                   for ($i = 0; $i < $sizeTab - 1; $i++) {
                     echo '<div class="carousel-item">
                     <center><img src="' . $tabPhoto[$i + 1] . '"  width="auto" height="224px" style=" max-height:299px;max-width:299px " alt="Image Produit"></center>
                     </div>';
                   }
-                  if($loc_Vid!="")
-                  {
+                  if ($loc_Vid != "") {
                     echo ' <div class="carousel-item">
                     <div class="embed-responsive embed-responsive-4by3">
-                      <iframe class="embed-responsive-item" src="'.$loc_Vid.'" width="auto" height="224px" style=" max-height:299px;max-width:299px ">
+                      <iframe class="embed-responsive-item" src="' . $loc_Vid . '" width="auto" height="224px" style=" max-height:299px;max-width:299px ">
                       </iframe>
                     </div>
                   </div>';
-
                   }
                   echo '
                   </div>';
                   ?>
 
                   <!-- Left and right controls -->
-                  <a class="carousel-control-prev" href="#slider" data-slide="prev">
+                  <a class="carousel-control-prev style='bottom: -130%; left: -15%;'" href="#slider" data-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                   </a>
-                  <a class="carousel-control-next" href="#slider" data-slide="next">
+                  <a class="carousel-control-next style='bottom: -130%;right: -15%;' " href="#slider" data-slide="next">
                     <span class="carousel-control-next-icon"></span>
                   </a>
 
                 </div>
 
+<!-- FIN DU CAROUSEL -->
 
+
+<!-- BLOC PRIX, NOM et PROMOTION -->
               </div>
             </td>
-            <td valign="top">
+            <td valign="top" style="min-width:45%">
               <?php
               //calcul des valeurs à afficher
               $price_promo = $data['Price'] * (1 - ($data['TauxPromo']) / 100);
-                
-              //
+              
+              
+              //affichage des infos principales du produit
               if ($price_promo != $data['Price']) {
-                echo "<div id='format_title'><div class=product-title>" . $data['Name'] . "</div></div>
+                echo "<div id='format_title'><div class=product-title>" . $name . "</div></div>
                     <div id='oldprix'><del>" . $data['Price'] . " €</del></div>
                     <div id='format_prix'>PROMOTION !!<br>" . $price_promo . " €</div>";
               } else {
-                echo "<div id='format_title'><div class=product-title>" . $data['Name'] . "</div></div>
+                echo "<div id='format_title'><div class=product-title>" . $name . "</div></div>
                       <div id='format_prix'>" . $price_promo . " €</div>";
               }
               echo "<div id='format_stock'>En stock</div>
@@ -142,38 +173,55 @@
                     <button type='button' class='btn btn-success' id='addToCart' onclick='addToCart()'>
                         Ajouter au panier
                     </button>
-                    </div></div>
-                    </tr>
-                  </table>
-                </div>
-                  <br><br><div id='desc'><h2>Description</h2><br>";
-                  if ($data['Cat']==2)
-                  {
-                    echo"Taille : ".$data['Size']."<br>
-                         Couleur : ".$data['Color']."<br>
-                         Homme : ".$data['Sex']."<br>
-                    ";
-                  }
-                  echo"
-                  " . $data['Descr'] . "
-                  </div>
-              </div>";
+                    </div></div>";
             }
+// <!-- FIN DU BLOC PRIX, NOM et PROMOTION -->  
 
-            //fermer la connection
-            $conn->close(); ?>
+ 
+                     //affichage de la description et des caractéristiques des produits vêtements
 
-            <?php
+              echo"
+                    </tr>
+      </table>
+    </div>
+      <br><br>
+      <div id='desc'>
+      
+        <h2>Description</h2>
+        <br>
+        <div class='row'>";
+  if ($cat == 2) {
+    echo "<div class='col-3 bg-secondary text-white rounded'>
+    Taille : " . $size . "<br>
+                Couleur : " . $color . "<br>
+                Morphologie : " . $sexePr . "<br>
+                </div>";
+    echo "<div class='col-9 border border-secondary rounded' style='min-height:100px;'>" . $desc . "</div></div></div>
+                ";
+  }
+  else
+  {
+    echo "<div class='col-12 border border-secondary rounded' style='min-height:100px;'>" . $desc . "</div></div></div>
+                ";
+  }
 
-            if (isset($_GET["Ajout"]) && $_GET["Ajout"] == 1) {
-              $_SESSION["Panier"][] = $_GET["Id"];
-              ?>
-              <script>
-                console.log(<?php echo "'" . $_GET['Id'] . "'"; ?>);
-              </script>
-            <?php
-          }
-          ?>
+ 
+
+
+//fermer la connection
+$conn->close(); ?>
+
+<?php
+
+if (isset($_GET["Ajout"]) && $_GET["Ajout"] == 1) {
+  $_SESSION["Panier"][] = $_GET["Id"];
+  ?>
+  <script>
+    console.log(<?php echo "'" . $Id . "'"; ?>);
+  </script>
+<?php
+}
+?>
             <!------ FOOTER ---------->
             <footer class="page-footer">
               <div class="container">
