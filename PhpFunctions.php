@@ -3,7 +3,11 @@
 //connect to the database after checking It exists with his tables
 function ConnectDatabase()
 {
-    session_start();
+    if(session_id() == "")
+    {
+        session_start();
+    }
+    
 
     //declaration variables
     $servername = "localhost";
@@ -48,7 +52,7 @@ function ConnectDatabase()
             }
 
             return $conn;
-        }
+}
 //code pour sauvegarder une image dans le répertoire du projet
 function SauvegardeImage($fileName, $fileTMP, $fileSize)
 {

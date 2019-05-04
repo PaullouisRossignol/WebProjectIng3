@@ -2,7 +2,7 @@
 <?php 
 echo"<link href='creerCompte.css' rel='stylesheet' id='bootstrap-css'>";
 session_start();
-session_destroy(); 
+session_unset();
 /*session deleted. if you try using this you've got an error*/
 
 
