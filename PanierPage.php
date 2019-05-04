@@ -67,13 +67,14 @@
       $tabPhoto = unserialize($data['Pic_loc']);
       
       $nb_article++;
-      $_SESSION['total_price'] += $data['Price'];
+      
       $cpt=0;
       for($i=0;$i<sizeof($_SESSION['Panier']);$i++)
       {
         if($_SESSION['Panier'][$i]==$data['ID'])
         $cpt++;
       }
+      $_SESSION['total_price'] += $data['Price']*$cpt*(1 - ($data['TauxPromo']) / 100);
     echo "
     <div class='bloc_produit'>
       <div class='bloc_sup'>
@@ -84,7 +85,7 @@
             </td>
             <td valign='top'>
               <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
-              <div class='format_prix'>".$data['Price']." €</div>
+              <div class='format_prix'>".$data['Price']*(1 - ($data['TauxPromo']) / 100)." €</div>
               <div class='desc'>
               ".$data['Descr']."
               </div>
