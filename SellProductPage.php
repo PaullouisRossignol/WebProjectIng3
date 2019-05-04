@@ -159,6 +159,15 @@
 
 
 
+<!-- bootstrap needs jQuery -->
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
+
+
+
+
+
 </body>
 
 </html>

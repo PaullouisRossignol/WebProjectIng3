@@ -17,7 +17,6 @@ background-color: white;
 .img_bloc{
     width: 100px;
     height: 100px;
-    border: 1px solid black;
 }
 .format_title{
     margin-left: 15px;
@@ -35,7 +34,10 @@ background-color: white;
 }
 #format_btn{
 	position: relative;
-	margin-left: 75%;
+    margin-left: 75%;
+}
+#format_btn a{
+    color: white;
 }
 #qty_format{
 	margin-left: 1px;

@@ -2,36 +2,84 @@
 <html>
 
 <head>
-  <title>ECE Amazon</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="HomePage.css">
-  <link rel="stylesheet" type="text/css" href="ProductPageBis.css">
+<title>ECE Amazon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="HomePage.css">
+<link rel="stylesheet" type="text/css" href="ProductPageBis.css">
 
-  <style>
-
-
-  </style>
-  <script>
-    function addToCart() {
-      document.location.href = "ProductPage.php?Id=" + <?php echo $Id; ?> + "&Ajout=1";
-    }
-    
-  </script>
-   
-</head>
-
-<body>
 
   <!------ HEADER NAVBAR ---------->
   <?php include("header.php"); ?>
 
   <!------ CONTAINER BODY ---------->
+
+  <?php
+//Si on a submit (ajouter au panier)
+include "PhpFunctions.php";
+if(isset($_POST['submit']))
+{
+  
+  $conn=ConnectDatabase();
+ 
+  
+  $idv=$_GET['Id'];
+  $cpt=0;
+  $actu=0;
+   
+  //Ajout de l'ID dans le Panier depuis l'url
+
+  if(!isset($_SESSION['Panier']))
+  {
+    $_SESSION['Panier']=array();
+    echo"tmtc je m'active";
+  }
+  $_SESSION["Panier"] = array_values( $_SESSION["Panier"]);
+  for($i=0;$i<sizeof($_SESSION['Panier']);$i++)
+  {
+    if($_SESSION['Panier'][$i]==$idv)
+    $cpt++;
+  }
+
+  $sql = "SELECT * FROM products WHERE ID=".$idv;
+  $result = $conn->query($sql);
+  if (isset($result->num_rows)) 
+  {
+    if ($result->num_rows > 0) 
+    {
+      while ($row = $result->fetch_assoc()) 
+      {
+        $actu=$row["Qty"];
+      }
+    }
+    else
+    {
+      echo"walou ton article est mort2";
+    }
+  }
+  else
+  {
+    echo"walou ton article est mort";
+  }
+
+  if ($cpt<$actu) {
+    //on peut l'ajouter ( au nvx des quantité ;))
+    $_SESSION['Panier'][]=$idv;
+  }
+  else
+  {
+    echo"<div class='card bg-danger text-white'>
+                <div class='card-body'>Quantité d'article voulu trop élevé!</div>
+              </div>";
+  }
+
+}
+?>
 
   <!-- Mise en place de la connexion et requete SQL -->
   <?php
@@ -168,12 +216,18 @@
                 echo "<div id='format_title'><div class=product-title>" . $name . "</div></div>
                       <div id='format_prix'>" . $price_promo . " €</div>";
               }
-              echo "<div id='format_stock'>En stock</div>
-                    <div id='format_btn'><div class='btn-group cart'>
-                    <button type='button' class='btn btn-success' id='addToCart' onclick='addToCart()'>
-                        Ajouter au panier
-                    </button>
-                    </div></div>";
+              echo "<div id='format_stock'>En stock</div>";
+
+              if(!isset($_SESSION['type'])|| $_SESSION['type']==0)
+                    {
+                      echo "<form method='POST'action=''>
+                        <div id='format_btn'><div class='btn-group cart'>
+                          <button type='submit' name='submit' class='btn btn-success' id='addToCart'>
+                              Ajouter au panier
+                          </button>
+                        </div></div>
+                      </form>";
+                    }
             }
 // <!-- FIN DU BLOC PRIX, NOM et PROMOTION -->  
 
@@ -211,41 +265,30 @@
 //fermer la connection
 $conn->close(); ?>
 
-<?php
-
-if (isset($_GET["Ajout"]) && $_GET["Ajout"] == 1) {
-  $_SESSION["Panier"][] = $_GET["Id"];
-  ?>
-  <script>
-    console.log(<?php echo "'" . $Id . "'"; ?>);
-  </script>
-<?php
-}
-?>
-            <!------ FOOTER ---------->
-            <footer class="page-footer">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-8 col-md-8 col-sm-12">
-                    <h6 class="text-uppercase font-weight-bold">Information additionnelle</h6>
-                    <p>
-                      Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
-                    </p>
-                    <p>
-                      Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
-                    </p>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12">
-                    <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                    <p>
-                      37, quai de Grenelle, 75015 Paris, France <br>
-                      info@webDynamique.ece.fr <br>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="footer-copyright text-center">&copy; 2019 Copyright | Droit d'auteur: webDynamique.ece.fr</div>
-            </footer>
+<!------ FOOTER ---------->
+<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <h6 class="text-uppercase font-weight-bold">Information additionnelle</h6>
+        <p>
+          Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
+        </p>
+        <p>
+          Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
+        </p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <p>
+          37, quai de Grenelle, 75015 Paris, France <br>
+          info@webDynamique.ece.fr <br>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright text-center">&copy; 2019 Copyright | Droit d'auteur: webDynamique.ece.fr</div>
+</footer>
 
 </body>
 
