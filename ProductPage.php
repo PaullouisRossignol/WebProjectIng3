@@ -12,11 +12,6 @@
 <link rel="stylesheet" type="text/css" href="HomePage.css">
 <link rel="stylesheet" type="text/css" href="ProductPageBis.css">
 
-<script>
-  function addToCart(){
-    document.location.href="ProductPage.php?Id="+<?php echo $_GET['Id']; ?>+"&Ajout=1";
-  }
-</script>
 
 
 
@@ -68,17 +63,70 @@
 
 <?php
 //Si on a submit (ajouter au panier)
+include "PhpFunctions.php";
 if(isset($_POST['submit']))
 {
-  //Ajout de l'ID dans le Panier
-  sleep(4);
+  
+  $conn=ConnectDatabase();
+ 
+  
+  $idv=$_GET['Id'];
+  $cpt=0;
+  $actu=0;
+   
+  //Ajout de l'ID dans le Panier depuis l'url
+
+  if(!isset($_SESSION['Panier']))
+  {
+    $_SESSION['Panier']=array();
+    echo"tmtc je m'active";
+  }
+  $_SESSION["Panier"] = array_values( $_SESSION["Panier"]);
+  for($i=0;$i<sizeof($_SESSION['Panier']);$i++)
+  {
+    if($_SESSION['Panier'][$i]==$idv)
+    $cpt++;
+  }
+
+  $sql = "SELECT * FROM products WHERE ID=".$idv;
+  $result = $conn->query($sql);
+  if (isset($result->num_rows)) 
+  {
+    if ($result->num_rows > 0) 
+    {
+      while ($row = $result->fetch_assoc()) 
+      {
+        $actu=$row["Qty"];
+      }
+    }
+    else
+    {
+      echo"walou ton article est mort2";
+    }
+  }
+  else
+  {
+    echo"walou ton article est mort";
+  }
+
+  if ($cpt<$actu) {
+    //on peut l'ajouter ( au nvx des quantité ;))
+    $_SESSION['Panier'][]=$idv;
+  }
+  else
+  {
+    echo"<div class='card bg-danger text-white'>
+                <div class='card-body'>Quantité d'article voulu trop élevé!</div>
+              </div>";
+  }
+
 }
 ?>
 
 
 <!-- Mise en place de la connexion et requete SQL -->
 <?php
-					include "PhpFunctions.php";
+					
 
 					//DATABASE
 					$conn=ConnectDatabase();
@@ -109,9 +157,9 @@ if(isset($_POST['submit']))
 
                     if(!isset($_SESSION['type'])|| $_SESSION['type']==0)
                     {
-                      echo "<form action=''>
+                      echo "<form method='POST'action=''>
                         <div id='format_btn'><div class='btn-group cart'>
-                          <button type='submit' class='btn btn-success' id='addToCart' onclick='addToCart()'>
+                          <button type='submit' name='submit' class='btn btn-success' id='addToCart'>
                               Ajouter au panier
                           </button>
                         </div></div>

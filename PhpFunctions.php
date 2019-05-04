@@ -3,7 +3,11 @@
 //connect to the database after checking It exists with his tables
 function ConnectDatabase()
 {
-    session_start();
+    if (session_id()=='')
+    {
+        session_start();
+
+    }
 
     //declaration variables
     $servername = "localhost";
