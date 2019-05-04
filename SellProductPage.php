@@ -81,7 +81,15 @@
 
       //connection a la base de données
       $conn = ConnectDatabase();
-      $sql = "SELECT * FROM products";
+
+      if($_SESSION['type']==1)
+      {
+        $sql = "SELECT * FROM products where Seller='".$_SESSION["user"]."'";
+      }
+      else
+      {
+        $sql = "SELECT * FROM products";
+      }
       $result = $conn->query($sql);
 
       if (isset($result->num_rows)) {

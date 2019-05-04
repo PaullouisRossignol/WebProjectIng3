@@ -22,109 +22,189 @@
 </head>
 <body>
 
-<!------ HEADER NAVBAR ----------> 
+<!------ HEADER NAVBAR ---------->
 <?php include("header.php"); ?>
 
 <!------ CONTAINER BODY ---------->
-<div class="container">
+<div class="container" id="heyho">
   
-      <br>
-      <h1>Mon Compte : </h1>
+  <br>
+  <h1>Mon Compte : </h1>
 
 
-      <?php 
+    <?php 
       include 'PhpFunctions.php';
       
       $connected=0;
 
       $conn=ConnectDatabase();
      
-
-      switch($_SESSION["type"])
+      if( !isset($_SESSION["user"]) )
       {
-        case 0: 
-          
-          $sql="SELECT * FROM clients WHERE Email = '".$_SESSION["user"]."'";
-          $result = $conn->query($sql);
+        echo "<br>
+              <div class='card bg-danger text-white'>
+                <div class='card-body'>Vous n'êtes pas connecté!</div>
+              </div> <br> 
+               <br>
+                <center>
+                <a class='underlineHover' href='Login.php'>Vous connecter</a>
+                </center>
 
-          while ($row = $result->fetch_assoc()) {
-
-          if (isset($result->num_rows)) {
-            if ($result->num_rows > 0) {
-              // echo"
-              // "
-              // <div class='card-columns'>
-              //     <div class='card bg-light'>
-              //       <div class='card-body text-center'>
-              //         <p class='card-text'>Some text inside the fifth card</p>
-              //       </div>
-              //     </div>
-                 echo "<div class='row'>
-                          <div class='col-4'></div>
-  
-                              <div class='col-8'>
-                <div class='card ' style='width:400px'>
-                  <img class='card-img-top' src='".$row['Pic_loc']."' alt='Card image'>
-                    <div class='card-body'>
-                        <h4 class='card-title text-center'>Compte Client: " . $row['Name'] ." ". $row['Surname'] ."</h4>
-                      <p class='card-text'>Numéro de Carte : ". $row['Card_num'] ." </p>
-                      <p class='card-text'>Adresse Email: ".$row['Email']."</p>
-               
-                    </div>
-                </div>
-                </div>
-                </div>
-                ";
-
-             //    <div class='card bg-light'>
-             //      <div class='card-body text-center'>
-             //        <p class='card-text'>Some text inside the fifth card</p>
-             //      </div>
-             //    </div>
-             // </div>
-              // "
-              //   ";
-
-
-
-                // // parcourt de chaque ligne
-                
-                //      echo "<h2>Adresse Email : </h2>";
-                //     echo  $row['Email'] ;
-                //      echo "<h2>Nom : </h2>";
-                //     echo "<td>" '". $row['Name'] ."' "</td>";
-                //      echo "<h2>Prénom : </h2>";
-                //     echo "<td>" . $row['Surname'] . "</td>";
-                //      echo "<h2>Numéro de Carte : </h2>";
-                //     echo "<td>" . $row['Card_num'] . "</td>";
-                //      echo "<h2>Photo de profile: </h2>";
-
-
-                //     echo "<img src='".$row['Pic_loc']."' class='rounded-circle' alt='Photo de Profil'>";
-                }
-                
-            } else
-                echo "<center><div>Erreur à l'affichage des informations de votre compte <br><a href='HomePage.html'>Home Page</a></div></center>";
-        }
-         
-          
+             <br>  <br> <br>
             
+              ";
 
-
-
-
-          break;
-        case 1: 
-          echo "vendeur.";
-          break;
-        case 2: 
-          echo "admin.";
-          break;
       }
+      else
+      {     
+
+              switch($_SESSION["type"])
+              {
+
+
+                ////////////////////////////////////////CLIENT
+
+                case 0: 
+                  
+                  $sql="SELECT * FROM clients WHERE Email = '".$_SESSION["user"]."'";
+                  $result = $conn->query($sql);
+                  if (isset($result->num_rows)) 
+                  {
+                    if ($result->num_rows > 0) 
+                    {
+                       while ($row = $result->fetch_assoc()) 
+                       {
+                        echo "<div class='row'>
+                                      <div class='col-4'>
+                                      </div>
+                                      <div class='col-8'>
+                                            <div class='card ' style='width:400px'>
+                                              <img class='card-img-top' src='".$row['Pic_loc']."' alt='Card image'>
+                                              <div class='card-body'>
+                                                <h4 class='card-title text-center'>Compte Client: " . $row['Name'] ." ". $row['Surname'] ."</h4>
+                                                <p class='card-text'>Numéro de Carte : ". $row['Card_num'] ." </p>
+                                                <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                                              </div>
+                                            </div>
+                                      </div>
+                                    </div>
+                                  ";
+                        }
+                      } else
+                        echo "<center><div>Erreur à l'affichage des informations de votre compte <br><a href='HomePage.html'>Home Page</a></div></center>";
+                    }
+                  break;
+
+                  /////////////////////////////////////////VENDEUR
+
+                case 1: 
+                  $sql="SELECT * FROM seller WHERE Email = '".$_SESSION["user"]."'";
+                  $result = $conn->query($sql);
+                      if (isset($result->num_rows)) 
+                      {
+                        if ($result->num_rows > 0) 
+                            {
+                              while ($row = $result->fetch_assoc()) 
+                                {
+                                   echo " <style>
+                                              #heyho
+                                              {
+                                                background-image: url('".$row['Back_pic_loc']."');
+                                                background-repeat: no-repeat;
+                                                 background-position: center center;
+                                                 background-size: cover;  
+                                                   background-clip: content-box;
+                                            }
+                                          </style>
+
+                                          <div class='row'>
+                                            <div class='col-4'>
+                                            </div>
+                                            <div class='col-8'>
+                                                  <div class='card ' style='width:400px'>
+                                                    <img class='card-img-top' src='".$row['Pic_loc']."' alt='".$row['Pic_loc']."'>
+                                                    <div class='card-body'>
+                                                      <h4 class='card-title text-center'>Compte Vendeur: " . $row['Name'] ." ". $row['Surname'] ."</h4>
+                                                      <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                                 
+                                                    </div>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        ";
+                                   }
+                            
+                              } else  echo "<center><div>Erreur à l'affichage des informations de votre compte <br><a href='HomePage.html'>Home Page</a></div></center>";
+                      }
+
+                  break;
+                case 2: 
+                 $sql="SELECT * FROM admin WHERE Email = '".$_SESSION["user"]."'";
+                  $result = $conn->query($sql);
+
+                    if (isset($result->num_rows)) 
+                      {
+                        if ($result->num_rows > 0) 
+                            {
+                              while ($row = $result->fetch_assoc()) 
+                                {
+                                   echo "
+                                          <div class='row'>
+                                            <div class='col-4'>
+                                            </div>
+                                            <div class='col-8'>
+                                                  <div class='card ' style='width:400px'>
+                                                    <img class='card-img-top' src='".$row['Pic_loc']."' alt='".$row['Pic_loc']."'>
+                                                    <div class='card-body'>
+                                                      <h4 class='card-title text-center'>Compte Admin: " . $row['Name'] ." ". $row['Surname'] ."</h4>
+                                                      <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                                 
+                                                    </div>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        ";
+                                   }
+                            
+                              } else  echo "<center><div>Erreur à l'affichage des informations de votre compte <br><a href='HomePage.html'>Home Page</a></div></center>";
+                      }
+
+                  break;
+
+                  default:
+                    echo "Vous n'êtes pas connecté";
+      }// <div class='btn-group cart'>
+            //   <button type='button' class='btn btn-success' id='addToCart'>
+            //     Se deconnecter
+            //   </button>
+            // </div>
+      echo "<br>
+
+            
+      <center>
+      <form action='Deco.php' method='post'>
+            <button type='submit' class='btn btn-danger'>Se deconnecter</button>
+            </div>
+      </form><br>
+      </center>
+
+      <center>
+      <form action='Payement.php' method='post'>
+             <button type='submit' class='btn btn-info'>Payement</button>
+
+            </div>
+      </form><br>
+      </center>
+
+      ";
+    }
+
 
 
 
       ?>
+  </div>
+
 
 
 

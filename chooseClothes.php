@@ -41,28 +41,15 @@
   $conn->set_charset('utf8');
   $conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
 
-    //requete pour trouver les diff. caracs.
-    $sql = "SELECT Name FROM products WHERE Id='" .$_GET['Id']."'";
-    $result = $conn->query($sql);
-    while ($data = mysqli_fetch_assoc($result)) {
-        $name=$data["Name"];
-        break;
-    }
+    
+    $name=$_GET['name'];
 
-    //methode Get ou Post
-  if(isset($_GET["Id"]))
-  {
-    $Id=$_GET['Id'];
-  }
-  if(isset($_POST["Id"]))
-  {
-    $Id=$_POST['Id'];
-  }
+    
 
     //on regarde si on compare tjrs le mm vetements
-    if(isset($_SESSION['vet']) && $_SESSION['vet'] !=$Id)
+    if(isset($_SESSION['vet']) && $_SESSION['vet'] !=$name)
     {
-        $_SESSION['vet']=$Id;
+        $_SESSION['vet']=$name;
         unset($_SESSION["size"]);
         unset($_SESSION["col"]);
         unset($_SESSION["sex"]);
@@ -70,7 +57,7 @@
     }
     else
     {
-        $_SESSION['vet']=$Id;
+        $_SESSION['vet']=$name;
     }
     
         $choixSize="";
