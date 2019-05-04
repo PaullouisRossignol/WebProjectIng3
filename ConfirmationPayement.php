@@ -120,6 +120,7 @@
                     if ($conf_achat==1) 
                     {
                         //L'achat est confirmé 
+                        $list="";
 
                         echo 
                         "
@@ -151,6 +152,7 @@
 
                                                 while ($row = $result->fetch_assoc()) 
                                                 {
+                                                    $list.=$row["Name"]."<br>";
                                                     echo $row["Name"]."<br>";
                                                     $qteprc=$row["Qty"]-1;
                                                     $sql2 = 'UPDATE products SET Qty=';
@@ -161,7 +163,7 @@
                                                     if($conn->query($sql2))
                                                     {
                                                         echo"Modification BDD OK ;)"; 
-                                                        unset($_SESSION["Panier"]);
+                                                        
                                                     }
                                                     else
                                                     {
@@ -219,7 +221,8 @@
 
                             $content=
                             '<body> <center><h1>Merci de Votre achat!</h1>
-                            <p> Bonjour '. $Prenom.' '.$Nom.' vous recevez ce mail suite a une commande d un montant de : '.$prix.' effectuer sur notre site web Eceamazone!</p>
+                            <p> Bonjour '. $Prenom.' '.$Nom.' vous recevez ce mail suite a une commande d un montant de : '.$prix.' € effectuer sur notre site web Eceamazone!</p>
+                            <p>Vous avez achete : '.$list.'
                             <p>Retrouvez votre compte <a href="http://localhost/maisquoi/MyAccount.php">ICI</a>. </center> </body>';
 
 
@@ -240,6 +243,8 @@
                          $mail->AddAddress($adress);
 
                          $mail->Send();
+
+                         unset($_SESSION["Panier"]);
 
 
                     }

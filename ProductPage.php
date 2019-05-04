@@ -83,7 +83,7 @@ if(isset($_POST['submit']))
 
   <!-- Mise en place de la connexion et requete SQL -->
   <?php
-  include "PhpFunctions.php";
+  
 
   //DATABASE
   $conn = ConnectDatabase();
@@ -216,7 +216,12 @@ if(isset($_POST['submit']))
                 echo "<div id='format_title'><div class=product-title>" . $name . "</div></div>
                       <div id='format_prix'>" . $price_promo . " €</div>";
               }
-              echo "<div id='format_stock'>En stock</div>";
+              if ($data['Qty']>0) {
+                echo "<div id='format_stock'>En stock</div>";
+              }
+              else
+                echo "<div id='format_stock' style='color:red;'>Epuisé</div>";
+              
 
               if(!isset($_SESSION['type'])|| $_SESSION['type']==0)
                     {

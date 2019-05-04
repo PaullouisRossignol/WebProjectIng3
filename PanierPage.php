@@ -26,7 +26,10 @@
 
 	//DATABASE
   $conn=ConnectDatabase();
-  
+  if (!isset($_SESSION['Panier'])) {
+    $_SESSION['Panier']=array();
+  }
+
 	
   //si le BDD existe, faire le traitement
   $conn->set_charset('utf8');
