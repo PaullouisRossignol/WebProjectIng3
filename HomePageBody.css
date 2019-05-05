@@ -1,8 +1,9 @@
 #promo{
+    background-image: url('res/promo.png');
     width: 100%;
-    height: 500px;
+    height: 530px;
     /*border: 1px solid black;*/
-    background-color: rgb(169, 252, 252);
+
     overflow-x: auto;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -11,15 +12,14 @@
     width: 100%;
     height: 500px;
     /*border: 1px solid black;*/
-    background-color: rgb(210, 233, 111);
+    background-image: url('res/bottom.png');
 }
 #format_text{
-  background-color: rgb(169, 252, 252);
   height: 50px;
 }
 #bloc_categorie{
   border: 1px solid black;
-  margin-left: 60px;
+  margin-left: 45px;
   width: 330px;
   height: 430px;
 }
@@ -97,4 +97,8 @@
   text-align: center;
   color: black;
   font-weight: bold;
+}
+#best{
+  font-family: impact, fantasy;
+  font-size: 40px;
 }

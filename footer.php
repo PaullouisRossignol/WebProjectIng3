@@ -5,10 +5,10 @@
       <div class="col-lg-8 col-md-8 col-sm-12">
         <h6 class="text-uppercase font-weight-bold">Information additionnelle</h6>
         <p>
-          Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
+          Ce site est la propriété de l'ECE Paris
         </p>
         <p>
-          Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.
+          Développé par ECE Amazon. <a href="mailto:amazonece123@gmail.com">Contactez-nous</a>
         </p>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-12">

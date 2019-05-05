@@ -36,7 +36,7 @@
 <!-------- PROMOTION --------->
 
 <div id="format_text">
-  <h1>PROMOTION ET VENTES FLASH</h1>
+<div id="best">PROMOTIONS ET VENTES FLASH</div>
 </div>
 <div id="promo">
   <table>
@@ -45,7 +45,7 @@
       while ($data = mysqli_fetch_assoc($result)) {
         //on récupère le tableau de photo
       $tabPhoto = unserialize($data['Pic_loc']);
-      $tabPhoto[0]; 
+      
           echo "
           <td>
             <div id='bloc_produit'>
@@ -88,7 +88,7 @@
   $result_sport = $conn->query( $sql_sport);
 ?>
 <div id="bottom">
-  <h1>BEST SELLER</h1>
+  <div id="best">BEST SELLER</div>
   <table>
     <tr>
       <td>
@@ -97,13 +97,16 @@
           <div id="bloc_produit">
           <?php
             while ($data = mysqli_fetch_assoc($result_livre)) {
-              echo "<div id='img_product'>
-              <div class='img_bloc'>IMAGE</div>
+              $tabPhoto = unserialize($data['Pic_loc']);
+              echo "
+              <div id='img_product'>
+              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
             </div>
+            
             <table>
               <tr>
                 <td>
-                  <div id='format_title'>".$data['Name']."</div>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -120,13 +123,15 @@
         <div id="bloc_categorie" style="background-color:red;">
         <div id="format_categorie"><a href="SellingPage.php?Cat=1">MUSIQUE</a></div>
           <div id="bloc_produit">
-            <div id="img_product">
-              <div class="img_bloc">IMAGE</div>
+          <?php while ($data = mysqli_fetch_assoc($result_music)) {
+            $tabPhoto = unserialize($data['Pic_loc']);
+              echo "<div id='img_product'>
+              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
             </div>
             <table>
               <tr>
                 <td>
-                  <div id='format_title'>NOM</div>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -135,7 +140,8 @@
                 </td>
               </tr>
             </table>
-            <div id='format_desc'>Description</div>
+            <div id='format_desc'>".$data['Descr']."</div>
+          </div>";}?>
           </div>
         </div>
       </td>
@@ -143,13 +149,15 @@
         <div id="bloc_categorie" style="background-color:green;">
         <div id="format_categorie"><a href="SellingPage.php?Cat=2">VÊTEMENTS</a></div>
           <div id="bloc_produit">
-            <div id="img_product">
-              <div class="img_bloc">IMAGE</div>
+          <?php while ($data = mysqli_fetch_assoc($result_vet)) {
+            $tabPhoto = unserialize($data['Pic_loc']);
+              echo "<div id='img_product'>
+              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
             </div>
             <table>
               <tr>
                 <td>
-                  <div id='format_title'>NOM</div>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -158,7 +166,8 @@
                 </td>
               </tr>
             </table>
-            <div id='format_desc'>Description</div>
+            <div id='format_desc'>".$data['Descr']."</div>
+          </div>";}?>
           </div>
         </div>
       </td>
@@ -166,13 +175,15 @@
         <div id="bloc_categorie"style="background-color:yellow;">
         <div id="format_categorie"><a href="SellingPage.php?Cat=3">SPORT & LOISIRS</a></div>
           <div id="bloc_produit">
-            <div id="img_product">
-              <div class="img_bloc">IMAGE</div>
+            <?php while ($data = mysqli_fetch_assoc($result_sport)) {
+              $tabPhoto = unserialize($data['Pic_loc']);
+              echo "<div id='img_product'>
+              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
             </div>
             <table>
               <tr>
                 <td>
-                  <div id='format_title'>NOM</div>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -181,7 +192,8 @@
                 </td>
               </tr>
             </table>
-            <div id='format_desc'>Description</div>
+            <div id='format_desc'>".$data['Descr']."</div>
+          </div>";}?>
           </div>
         </div>
       </td>
