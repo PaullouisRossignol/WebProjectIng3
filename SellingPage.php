@@ -122,7 +122,7 @@
               <div class='bloc_sup'>
                 <table>
                   <tr>
-                    <td>
+                    <td style='width: 200px;height: 200px;'>
                       <div class='img_bloc' > <center><img src='" . $tabPhoto[0] . "' alt='Image Produit' width='auto'  height='auto' style=' max-height:200px;max-width:200px; ' ></center>
                     </div></td>
                     <td valign='top'>
@@ -159,12 +159,12 @@
             $('.bloc_produit').mouseover(function(){
               $(this).css("background-color", "#ddd");
               $(this).children().css("background-color", "#ddd");
-            $('.img_bloc').css("background-color", "white");
+            $('.img_bloc').css("background-color", "#f5f5f5");
               
             });
             $('.bloc_produit').mouseout(function(){
-              $(this).css("background-color", "white");
-              $(this).children().css("background-color", "white");
+              $(this).css("background-color", "#f5f5f5");
+              $(this).children().css("background-color", "#f5f5f5");
             });
         });
 </script>

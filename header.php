@@ -31,32 +31,29 @@
       <?php
 
       	session_start();
-		
+    
+        
 		
 		if(isset($_SESSION["user"]))
 		{
-			if ($_SESSION["type"]==0) {
-				echo"<a href='PanierPage.php'>Panier</a>";
 			
-			}
-			else
-			{
-				if ($_SESSION["type"]==1)
-			      {
-			      	echo"<a href='SellProductPage.php'>Vendre</a>";
-			      }
-			    else
-			    {
-			    	if ($_SESSION["type"]==2)
-			    	{
-			    		echo"<a href='SellProductPage.php'>Vendre</a>";
-			    		echo"<a href='gestVendeur.php'>Admin</a>";
-			    	}
-			    }
-	      	}
-	    }
-	    else
-	    	echo"<a href='Login.php'>Se Connecter</a>";
+			if ($_SESSION["type"]==1)
+      {
+        echo"<a href='SellProductPage.php'>Vendre</a>";
+      }
+      elseif ($_SESSION["type"]==2)
+      {
+        echo"<a href='SellProductPage.php'>Vendre</a>";
+        echo"<a href='gestVendeur.php'>Admin</a>";
+      }
+			    
+	  } else
+        echo"<a href='Login.php'>Se Connecter</a>";
+    
+        if (!isset($_SESSION["type"]) || $_SESSION["type"]==0) {
+          echo"<a href='PanierPage.php'>Panier</a>";
+        
+        }
 
       ?>
 

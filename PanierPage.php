@@ -84,10 +84,12 @@
     echo "
     <div class='bloc_produit'>
       <div class='bloc_sup'>
+      <div class='row'>
+      <div class='col-8'>
         <table>
           <tr>
             <td>
-              <div class='img_bloc'><img src=".$tabPhoto[0]." alt='Image Produit' width='auto'  height='100px' style=' max-height:100px;max-width:100px'></div>
+              <div class='img_bloc'><center><img src=".$tabPhoto[0]." alt='Image Produit' width='auto'  height='100px' style=' max-height:100px;max-width:100px'></center></div>
             </td>
             <td valign='top'>
               <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
@@ -96,14 +98,18 @@
               ".$data['Descr']."
               </div>
             </td>
-            <td>
-              <div id='qty_format'>Quantité<br>x".$cpt."<br><br>
-              <div id='img_trash'><a href='PanierPage.php?ID=".$data['ID']."'>
+            <td></td>
+            </tr>
+          </table>
+          </div>
+          
+              <div class='col-4' id='qty_format'>Quantité<br>x".$cpt."<br><br>
+              <div id='img_trash'><center><a href='PanierPage.php?ID=".$data['ID']."'>
               <img src='res/icon_trash.png' alt='trash_icon'>
-              </a></div></div>
+              </a></center></div></div>
             </td>
           </tr>
-        </table>
+          </div>
       </div>
     </div>";
   }
@@ -111,14 +117,25 @@
     //fermer la connection
     $conn->close();
 
-    echo "</div><h2>TOTAL : ".$_SESSION['total_price']." €</h2>
+    if(isset($_SESSION['user']))
+    {
+      echo "</div><h2>TOTAL : ".$_SESSION['total_price']." €</h2>
       <div id='format_btn'><a href='Payement.php' style='color:white;'>
       <button type='button' class='btn btn-success'>
         Passer à la commande <br> ".$nb_article." article(s)
       </button></a>
-  </div>";}
+  </div>";
+    }
+    else
+    {
+      echo "</div><h2>TOTAL : ".$_SESSION['total_price']." €</h2>
+      <div id='format_btn'><center><a href='Login.php' style='color:blue;'>Connectez-vous pour passer votre commande !
+  </a></center></div>";
+    }
+    }
   ?>
 </div>
+
   <script type="text/javascript">
     $(document).ready(function () {
       $('.header').height($(window).height());

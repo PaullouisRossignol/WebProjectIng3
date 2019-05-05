@@ -47,7 +47,7 @@
               </div> <br> 
                <br>
                 <center>
-                <a class='underlineHover' href='Login.php'>Vous connecter</a>
+                <a class='underlineHover' href='Login.php'>se connecter</a>
                 </center>
 
              <br>  <br> <br>
@@ -78,12 +78,13 @@
                                       <div class='col-4'>
                                       </div>
                                       <div class='col-8'>
-                                            <div class='card ' style='width:400px'>
+                                            <div class='card ' style='width:300px'>
                                               <img class='card-img-top' src='".$row['Pic_loc']."' alt='Card image'>
                                               <div class='card-body'>
-                                                <h4 class='card-title text-center'>Compte Client: " . $row['Name'] ." ". $row['Surname'] ."</h4>
-                                                <p class='card-text'>Numéro de Carte : ". $row['Card_num'] ." </p>
-                                                <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                                                <h4 class='card-title text-center'>Compte Client:<br> </h4>
+                                                <h5> Mr/Mme" . $row['Surname'] ." ". $row['Name'] ."<h5>
+                                                <p class='card-text'><b>Numéro de Carte </b>: ". $row['Card_num'] ." </p>
+                                                <p class='card-text'><b>Adresse Email</b>: ".$row['Email']."</p>
                                               </div>
                                             </div>
                                       </div>
@@ -118,23 +119,24 @@
                                           </style>
 
                                           <div class='row'>
-                                            <div class='col-4'>
-                                            </div>
-                                            <div class='col-8'>
-                                                  <div class='card ' style='width:400px'>
+                                          <div class='col-3'>
+                                                  <div class='card ' style='width:200px ;margin-left:20px;'>
                                                     <img class='card-img-top' src='".$row['Pic_loc']."' alt='".$row['Pic_loc']."'>
                                                     <div class='card-body'>
-                                                      <h4 class='card-title text-center'>Compte Vendeur: " . $row['Name'] ." ". $row['Surname'] ."</h4>
-                                                      <p class='card-text'>Adresse Email: ".$row['Email']."</p>
-                                 
+                                                    <h5 class='card-title text-center'>Compte Vendeur:<br> </h5>
+                                                    <h5 style='font-size:15px;'>Mr/Mme " . $row['Surname'] ." ". $row['Name'] ."<h5>
+                                                      <p class='card-text' style='font-size:14px;'>Adresse Email: ".$row['Email']."</p>
                                                     </div>
                                                   </div>
                                             </div>
+                                            <div class='col-9'>
+                                            </div> 
+                                            
                                           </div>
                                         ";
                                    }
                             
-                              } else  echo "<center><div>Erreur à l'affichage des informations de votre compte <br><a href='HomePage.html'>Home Page</a></div></center>";
+                              } else  echo "<center><div>Erreur à l'affichage des informations de votre compte :".$_SESSION["user"]." <br><a href='HomePage.html'>Home Page</a></div></center>";
                       }
 
                   break;
@@ -153,11 +155,12 @@
                                             <div class='col-4'>
                                             </div>
                                             <div class='col-8'>
-                                                  <div class='card ' style='width:400px'>
+                                                  <div class='card ' style='width:300px'>
                                                     <img class='card-img-top' src='".$row['Pic_loc']."' alt='".$row['Pic_loc']."'>
                                                     <div class='card-body'>
-                                                      <h4 class='card-title text-center'>Compte Admin: " . $row['Name'] ." ". $row['Surname'] ."</h4>
-                                                      <p class='card-text'>Adresse Email: ".$row['Email']."</p>
+                                                    <h4 class='card-title text-center'>Compte Admin:<br> </h4>
+                                                    <h5> Mr/Mme " . $row['Surname'] ." ". $row['Name'] ."<h5>
+                                                      <p class='card-text'><b>Adresse Email</b>: ".$row['Email']."</p>
                                  
                                                     </div>
                                                   </div>
@@ -173,28 +176,18 @@
 
                   default:
                     echo "Vous n'êtes pas connecté";
-      }// <div class='btn-group cart'>
-            //   <button type='button' class='btn btn-success' id='addToCart'>
-            //     Se deconnecter
-            //   </button>
-            // </div>
+      }
       echo "<br>
 
             
       <center>
       <form action='Deco.php' method='post'>
-            <button type='submit' class='btn btn-danger'>Se deconnecter</button>
+            <button type='submit' class='btn btn-danger' style='margin-bottom:20px;'>Se deconnecter</button>
             </div>
       </form><br>
       </center>
 
-      <center>
-      <form action='Payement.php' method='post'>
-             <button type='submit' class='btn btn-info'>Payement</button>
-
-            </div>
-      </form><br>
-      </center>
+      
 
       ";
     }

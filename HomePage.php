@@ -48,14 +48,14 @@
       
           echo "
           <td>
-            <div id='bloc_produit'>
+            <div id='bloc_produit' style='    margin-left: 50px; '>
               <div id='img_product'>
-                <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
+                <div class='img_bloc'><center><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></center></div>
               </div>
               <table>
                 <tr>
                   <td>
-                    <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
+                    <a href='ProductPage.php?Id=".$data['ID']."' style='color:black; font-size:20px '><div id='format_title' style='color:black; font-size:20px' >".$data['Name']."</div></a>
                   </td>
                   <td>
                     <div id='format_promo'>
@@ -65,7 +65,7 @@
                   </td>
                 </tr>
               </table>
-              <div id='format_desc'>".$data['Descr']."</div>
+             
             </div>
           </td>";
         }
@@ -92,7 +92,7 @@
   <table>
     <tr>
       <td>
-        <div id="bloc_categorie" style="background-color:blue;">
+        <div id="bloc_categorie" style="background-color:#f5f5f5 ;  border: 10px solid;border-image: linear-gradient(#0b02d8, #060089) 10;"><center>
         <div id="format_categorie"><a href="SellingPage.php?Cat=0">LIVRES</a></div>
           <div id="bloc_produit">
           <?php
@@ -100,13 +100,13 @@
               $tabPhoto = unserialize($data['Pic_loc']);
               echo "
               <div id='img_product'>
-              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
+              <div class='img_bloc'><center><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></center></div>
             </div>
             
             <table>
               <tr>
                 <td>
-                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title' style='color:black; font-size:20px'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -115,23 +115,23 @@
                 </td>
               </tr>
             </table>
-            <div id='format_desc'>".$data['Descr']."</div>
+            
           </div>";}?>
-        </div>
+        </div></center>
       </td>
       <td>
-        <div id="bloc_categorie" style="background-color:red;">
+        <div id="bloc_categorie" style="background-color:#f5f5f5 ;  border: 10px solid;border-image: linear-gradient(#b20707, #8c0000) 10;"><center>
         <div id="format_categorie"><a href="SellingPage.php?Cat=1">MUSIQUE</a></div>
           <div id="bloc_produit">
           <?php while ($data = mysqli_fetch_assoc($result_music)) {
             $tabPhoto = unserialize($data['Pic_loc']);
               echo "<div id='img_product'>
-              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
+              <div class='img_bloc'><center><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></center></div>
             </div>
             <table>
               <tr>
                 <td>
-                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title' style='color:black; font-size:20px'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -140,24 +140,24 @@
                 </td>
               </tr>
             </table>
-            <div id='format_desc'>".$data['Descr']."</div>
+           
           </div>";}?>
-          </div>
+          </div></center>
         </div>
       </td>
       <td>
-        <div id="bloc_categorie" style="background-color:green;">
+        <div id="bloc_categorie"  style="background-color:#f5f5f5 ;  border: 10px solid;border-image: linear-gradient(#0d660d, #004900) 10;"><center>
         <div id="format_categorie"><a href="SellingPage.php?Cat=2">VÊTEMENTS</a></div>
           <div id="bloc_produit">
           <?php while ($data = mysqli_fetch_assoc($result_vet)) {
             $tabPhoto = unserialize($data['Pic_loc']);
               echo "<div id='img_product'>
-              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
+              <div class='img_bloc'><center><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></center></div>
             </div>
             <table>
               <tr>
                 <td>
-                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'style='color:black; font-size:20px'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -166,24 +166,24 @@
                 </td>
               </tr>
             </table>
-            <div id='format_desc'>".$data['Descr']."</div>
+            
           </div>";}?>
-          </div>
+          </div></center>
         </div>
       </td>
       <td>
-        <div id="bloc_categorie"style="background-color:yellow;">
+        <div id="bloc_categorie"style="background-color:#f5f5f5 ;  border: 10px solid;border-image: linear-gradient(#e2aa02, #bf8f00) 10;"><center>
         <div id="format_categorie"><a href="SellingPage.php?Cat=3">SPORT & LOISIRS</a></div>
           <div id="bloc_produit">
             <?php while ($data = mysqli_fetch_assoc($result_sport)) {
               $tabPhoto = unserialize($data['Pic_loc']);
               echo "<div id='img_product'>
-              <div class='img_bloc'><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></div>
+              <div class='img_bloc'><center><img src='".$tabPhoto[0]."'alt='IMAGE_PRODUIT' width='auto'  height='240px' style=' max-height:240px;max-width:240px'></center></div>
             </div>
             <table>
               <tr>
                 <td>
-                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title'>".$data['Name']."</div></a>
+                <a href='ProductPage.php?Id=".$data['ID']."' style='color:black;'><div id='format_title' style='color:black; font-size:20px'>".$data['Name']."</div></a>
                 </td>
                 <td>
                   <div id='format_bestseller'>
@@ -192,9 +192,9 @@
                 </td>
               </tr>
             </table>
-            <div id='format_desc'>".$data['Descr']."</div>
+           
           </div>";}?>
-          </div>
+          </div></center>
         </div>
       </td>
     </tr>
@@ -205,11 +205,7 @@
 
 
 
-    <?php
-    /*$array_flash= array(252539,252542,252534);
-    $sql_flash = "SELECT * FROM products WHERE ID IN (".implode(',',$array_flash).")";
-    $result = $conn->query( $sql_flash);*/
-    ?>
+    
 </div>
 
 

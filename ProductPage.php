@@ -20,31 +20,37 @@
   <!------ CONTAINER BODY ---------->
 
   <?php
+  $cpt=0;
+  $actu=1;
 //Si on a submit (ajouter au panier)
 include "PhpFunctions.php";
-if(isset($_POST['submit']))
-{
-  
+
+
   $conn=ConnectDatabase();
  
   
   $idv=$_GET['Id'];
-  $cpt=0;
-  $actu=0;
+  
    
   //Ajout de l'ID dans le Panier depuis l'url
 
   if(!isset($_SESSION['Panier']))
   {
     $_SESSION['Panier']=array();
-    echo"tmtc je m'active";
   }
-  $_SESSION["Panier"] = array_values( $_SESSION["Panier"]);
-  for($i=0;$i<sizeof($_SESSION['Panier']);$i++)
-  {
-    if($_SESSION['Panier'][$i]==$idv)
-    $cpt++;
-  }
+  else{
+    $cpt=0;
+    $actu=0;
+    $_SESSION["Panier"] = array_values( $_SESSION["Panier"]);
+  
+  
+    for($i=0;$i<sizeof($_SESSION['Panier']);$i++)
+    {
+      if($_SESSION['Panier'][$i]==$idv)
+      $cpt++;
+    }
+  
+ 
 
   $sql = "SELECT * FROM products WHERE ID=".$idv;
   $result = $conn->query($sql);
@@ -57,28 +63,25 @@ if(isset($_POST['submit']))
         $actu=$row["Qty"];
       }
     }
-    else
-    {
-      echo"walou ton article est mort2";
-    }
+   
   }
-  else
-  {
-    echo"walou ton article est mort";
   }
+ 
+  
 
-  if ($cpt<$actu) {
+  if ($cpt<$actu && isset($_POST['submit'])) {
     //on peut l'ajouter ( au nvx des quantité ;))
     $_SESSION['Panier'][]=$idv;
+    $cpt++;
   }
-  else
+  if ($cpt>=$actu) 
   {
     echo"<div class='card bg-danger text-white'>
-                <div class='card-body'>Quantité d'article voulu trop élevé!</div>
+                <div class='card-body'>Cet article n'est plus disponible!</div>
               </div>";
   }
 
-}
+
 ?>
 
   <!-- Mise en place de la connexion et requete SQL -->
@@ -145,6 +148,7 @@ if(isset($_POST['submit']))
                   $desc=$data['Descr'];
                   $size=$data['Size'];
                   $cat=$data['Cat'];
+                  $Seller=$data['Seller'];
                   $sexePr= switchSex($data['Sex']);
                   // Indicateurs
 
@@ -216,10 +220,13 @@ if(isset($_POST['submit']))
                 echo "<div id='format_title'><div class=product-title>" . $name . "</div></div>
                       <div id='format_prix'>" . $price_promo . " €</div>";
               }
-              if ($data['Qty']>0) {
-                echo "<div id='format_stock'>En stock</div>";
+              if ($cpt>=$actu) {
+                echo "<div id='format_stock' style='color:red;'>Epuisé</div>";
               }
-              else
+              elseif ($data['Qty']>0)
+              {
+                echo "<div id='format_stock'>En stock</div>";
+              } else
                 echo "<div id='format_stock' style='color:red;'>Epuisé</div>";
               
 
@@ -255,12 +262,12 @@ if(isset($_POST['submit']))
                 Couleur : " . $color . "<br>
                 Morphologie : " . $sexePr . "<br>
                 </div>";
-    echo "<div class='col-9 border border-secondary rounded' style='min-height:100px;'>" . $desc . "</div></div></div>
+    echo "<div class='col-9 border border-secondary rounded' style='min-height:100px;'>" . $desc .'<br><br><br><b>Vendeur</b>: '.$Seller. "</div></div></div>
                 ";
   }
   else
   {
-    echo "<div class='col-12 border border-secondary rounded' style='min-height:100px;'>" . $desc . "</div></div></div>
+    echo "<div class='col-12 border border-secondary rounded' style='min-height:100px;'>" . $desc .'<br><br><br><b>Vendeur</b>: '.$Seller. "</div></div></div>
                 ";
   }
 

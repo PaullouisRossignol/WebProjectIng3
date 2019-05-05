@@ -12,7 +12,7 @@ echo"
 	<div class='main'>
  		<div class='main-center'> 
  			<center> 
- 				Vous êtes déconecté <br>
+ 				Vous êtes déconnecté. <br>
   				<a href='HomePage.php'> Home Page </a> 
   			</center> 
   		</div>

@@ -27,10 +27,7 @@
         $conn = ConnectDatabase();
 
 
-        
-        
-        //This Pseudo is ok
-        
+                
             $TypeCard = $_POST["TypeCard"];
             $numCard = $_POST["numCard"];
             $nameCard = $_POST["nameCard"];
@@ -49,15 +46,16 @@
                                 {
                                     $num=$row['Card_num'];
                                 }
-                            } else  echo "<center>
+                            } else  echo " <div class='main'>
+                                            <div class='main-center'>
+                                                <center>
                                                 <div>
                                                     Erreur La carte n'a pas été trouvée <br>
                                                     <a href='HomePage.html'>Home Page</a>
                                                 </div>
-                                            </center>";
+                                            </center> </div> </div>";
                     }
             
-                //adding the new user in users table
                 $sql = "SELECT * FROM bank_info WHERE Card_num = '".$num."'";
                 $result = $conn->query($sql);
 
@@ -104,17 +102,19 @@
                                                 <div class='card-body'>Numéro de la carte incorrecte</div>
                                               </div> <br> ";
                                     }
-                                    else echo "<br>
+                                    else echo "<center>
                                               <div class='card bg-danger text-white'>
                                                 <div class='card-body'>Type de la carte incorrecte</div>
-                                              </div> <br> ";
+                                              </div></center> ";
                                 }
-                            } else  echo "<center>
+                            } else  echo " <div class='main'>
+                                    <div class='main-center'>
+                                        <center>
                                             <div>
                                                 Erreur Les infos n'ont pas été trouvés <br>
                                                 <a href='HomePage.php'>Home Page</a>
                                             </div>
-                                        </center>";
+                                        </center></div></div>";
                     }
 
                     if ($conf_achat==1) 
@@ -127,7 +127,8 @@
                                 <div class='main'>
                                     <div class='main-center'>
                                         <center>
-                                            <div>Félicitation votre achat à été confirmé!<br>
+                                            <div>Félicitations votre achat à été confirmé!<br>
+                                            Un email confirmant votre commande vous a été envoyé !<br>
                                             <a href='HomePage.php'>Home Page</a><br>
                                             </div>
                                         </center>
@@ -140,7 +141,6 @@
                         {
                             if (sizeof($_SESSION["Panier"])!=0) 
                             {
-                                echo "<center>Vos produits : <br> ";
                                 for($i=0;$i<sizeof($_SESSION["Panier"]);$i++)
                                 {
                                     $sql ="SELECT * FROM products WHERE ID = '".$_SESSION["Panier"][$i]."'";
@@ -153,7 +153,6 @@
                                                 while ($row = $result->fetch_assoc()) 
                                                 {
                                                     $list.=$row["Name"]."<br>";
-                                                    echo $row["Name"]."<br>";
                                                     $qteprc=$row["Qty"]-1;
                                                     $sql2 = 'UPDATE products SET Qty=';
                                                     $sql2.=$qteprc;
@@ -162,12 +161,10 @@
                                                     
                                                     if($conn->query($sql2))
                                                     {
-                                                        echo"Modification BDD OK ;)"; 
                                                         
                                                     }
                                                     else
                                                     {
-                                                        echo"Modification BDD PAS OK :C"; 
                                                     }
                                                 }
                                             }

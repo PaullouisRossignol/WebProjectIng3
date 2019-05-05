@@ -40,13 +40,13 @@ background-color: white;
     color: white;
 }
 #qty_format{
-	margin-left: 1px;
-	
+	text-align: right;
 }
 #img_trash{
-	width: 20px;
-	height: 20px;
-	margin-left: 40px;
+	width: 25px;
+	height: 25px;
+    right: 20px;
+    position: absolute;
 }
 #img_trash:hover{
 	border: 1px solid red;

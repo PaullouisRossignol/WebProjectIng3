@@ -69,7 +69,7 @@
                         while ($row = $result->fetch_assoc()) {
                             $mail="'".$row['Email']."'";
                             $string='onclick="checkSuppr(' . $mail . ')"';
-                            echo "<tr><td>   <img src='" . $row['Pic_loc'] . "' class='img-thumbnail' alt='Photo de Profil' width='114.5' height='100'> </td>";
+                            echo "<tr><td width='120' height='120'>   <img src='" . $row['Pic_loc'] . "' class='img-thumbnail' alt='Photo de Profil' width='114.5' height='100'> </td>";
                             echo "<td>" . $row['Name'] . "</td>";
                             echo "<td>" . $row['Surname'] . "</td>";
                             echo "<td>" . $row['Email'] . "</td>";

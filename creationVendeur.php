@@ -61,8 +61,7 @@
                         console.log("New record in users created successfully");
                     </script>
                     <?php
-                    $_SESSION["user"] = $Email;
-                    $_SESSION["type"] = 0;
+                   
 
                     //adding the new user in clients table
                     $sql = "INSERT INTO seller (Email,Name,Surname,Pic_loc,Back_pic_loc) VALUES ('" . $Email . "',  '" . $nom . "','" . $prenom . "','" . $photoName . "','" . $fontName . "')";
