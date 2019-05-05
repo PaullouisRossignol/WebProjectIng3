@@ -47,8 +47,55 @@
 <div class="container">
   <div id="list_bloc">
     <?php 
-       
-       if($_GET['Cat']==2)
+       if(isset($_GET['search']))
+       {
+         if($_GET['search']!='')
+         {
+          echo"<b style='font-size:26px'>Recherche pour : ".$_GET['search']."</b>";
+         }
+         else
+         {
+          echo"<b style='font-size:26px'>Tout nos produits:</b>";
+         }
+        $sql = "SELECT * FROM products WHERE Name LIKE '%".$_GET['search']."%'";
+        $result = $conn->query( $sql);
+        while ($data = mysqli_fetch_assoc($result)) {  
+          $tabPhoto = unserialize($data['Pic_loc']);
+        $string='ProductPage.php';
+        echo "<div class='bloc_produit'>
+              <div class='bloc_sup'>
+                <table>
+                  <tr>
+                    <td style='width: 200px;height: 200px;'>
+                      <div class='img_bloc' > <center><img src='" . $tabPhoto[0] . "' alt='Image Produit' width='auto'  height='auto' style=' max-height:200px;max-width:200px; ' ></center>
+                    </div></td>
+                    <td valign='top'>
+                      <div class='format_title'><div class=product-title><a href='".$string."?Id=".$data['ID']."'>".$data['Name']."</a></div></div>";
+                      if($data['TauxPromo']!=0){
+                        echo "<table>
+                        <tr>
+                        <td><div class='format_prix'>".$data['Price']." €</div></td>
+                        <td><div class='format_prix'>-".$data['TauxPromo']."%</div></td>
+                        </tr>
+                        </table>";
+                              
+                      }else{
+                      echo"<div class='format_prix'>".$data['Price']." €</div>";}
+
+                      echo"<div class='desc'>
+                        ".$data['Descr']."
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>";}
+            if(mysqli_num_rows($result)==0)
+            {
+              echo'<br><br>Aucun résultat pour votre recherche';
+            }
+       }
+       elseif($_GET['Cat']==2)
        {
         
         $string='chooseClothes.php';
@@ -104,6 +151,10 @@
             </table>
           </div>
         </div>";}
+        if(sizeof($array)==0)
+        {
+          echo'<br><br>Aucun résultat pour votre recherche';
+        }
 
          }
 
@@ -146,6 +197,10 @@
                 </table>
               </div>
             </div>";}
+            if(mysqli_num_rows($result)==0)
+            {
+              echo'<br><br>Aucun résultat pour votre recherche';
+            }
        }
       
             //fermer la connection

@@ -5,11 +5,15 @@
         $('.header').height($(window).height());
     });
 </script>
-
-  <img src="res/logoeceamazon_bisbis.png">  
-    <span align="center"><INPUT TYPE=text name=q size=50 maxlength=255 value=""> 
-    <button type="button" class=" btn btn-light btn-sm">Rechercher</button>
-  
+<div class='row'>
+<div class='col-4'>
+  <img src="res/logoeceamazon_bisbis.png">  </div>
+  <div class='col-8' style="margin-top:20px;">
+      <form Method='Get' action="SellingPage.php" >
+        <INPUT TYPE=text name=search size=50 maxlength=255 value=""> 
+    <button type="submit" class=" btn btn-light btn-sm">Rechercher</button>
+  </form>
+  </div></div>
   <br>
     <div class="navbar">
       <a href="HomePage.php">Accueil</a>
@@ -57,6 +61,5 @@
 
       ?>
 
-      
   </div>
 </div>
