@@ -27,6 +27,7 @@
       <a href="MyAccount.php">Mon Compte</a>
       
 
+
       <?php
 
       	session_start();
@@ -58,6 +59,7 @@
 	    	echo"<a href='Login.php'>Se Connecter</a>";
 
       ?>
+
       
   </div>
 </div>

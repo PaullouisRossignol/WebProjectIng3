@@ -25,8 +25,12 @@
   include "PhpFunctions.php";
 
 	//DATABASE
-	$conn=ConnectDatabase();
-				 $_SESSION['Panier']= array(252525,1234,789456);	
+  $conn=ConnectDatabase();
+  if (!isset($_SESSION['Panier'])) {
+    $_SESSION['Panier']=array();
+  }
+
+	
   //si le BDD existe, faire le traitement
   $conn->set_charset('utf8');
   $conn->query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
@@ -39,10 +43,12 @@
       if($_GET['ID']==$_SESSION['Panier'][$i])
       {
         unset($_SESSION['Panier'][$i]);
+        break;
       }
     }
-    $sql = "SELECT * FROM products WHERE ID IN (".implode(',',$_SESSION['Panier']).")";
-  $result = $conn->query( $sql);
+    $_SESSION['Panier'] = array_values($_SESSION['Panier']);
+     $sql = "SELECT DISTINCT * FROM products WHERE ID IN (".implode(',',$_SESSION['Panier']).")";
+   $result = $conn->query( $sql);
   }
 
 ?>
@@ -50,47 +56,67 @@
 
 <div class="container">
   <h1>Votre Panier</h1>
-  <div id="list_bloc">
-    <?php $total_price=0;
+  <?php
+  if(sizeof($_SESSION['Panier'])==0)
+  {
+
+    echo "<div class='card bg-danger text-white'>
+            <div class='card-body'>Votre panier est vide! <a href='HomePage.php'>Accéder à la boutique.</a></div>
+          </div>";
+  }else{
+  echo "<div id='list_bloc'>"; 
+ 
+    $_SESSION['total_price']=0;
     $nb_article=0;
     while ($data = mysqli_fetch_assoc($result)) { 
       //on récupère le tableau de photo
-      /*$tabPhoto = unserialize($data['Pic_loc']);
-      $tabPhoto[0];*/
+      $tabPhoto = unserialize($data['Pic_loc']);
+      
       $nb_article++;
-      $total_price += $data['Price'];
+      
+      $cpt=0;
+      for($i=0;$i<sizeof($_SESSION['Panier']);$i++)
+      {
+        if($_SESSION['Panier'][$i]==$data['ID'])
+        $cpt++;
+      }
+      $_SESSION['total_price'] += $data['Price']*$cpt*(1 - ($data['TauxPromo']) / 100);
     echo "
     <div class='bloc_produit'>
       <div class='bloc_sup'>
         <table>
           <tr>
             <td>
-              <div class='img_bloc'><img src=".$data['Pic_loc']." alt='Image Produit' width='auto'  height='224px' style=' max-height:299px;max-width:299px'></div>
+              <div class='img_bloc'><img src=".$tabPhoto[0]." alt='Image Produit' width='auto'  height='100px' style=' max-height:100px;max-width:100px'></div>
             </td>
             <td valign='top'>
               <div class='format_title'><div class=product-title><a href='ProductPage.php?Id=".$data['ID']."'>".$data['Name']."</a></div></div>
-              <div class='format_prix'>".$data['Price']." €</div>
+              <div class='format_prix'>".$data['Price']*(1 - ($data['TauxPromo']) / 100)." €</div>
               <div class='desc'>
               ".$data['Descr']."
               </div>
             </td>
             <td>
-              <div id='qty_format'>Quantité<br>x".$data['Qty']."<br><br><div id='img_trash'><a href='PanierPage.php?ID=".$data['ID']."'><img src='res/icon_trash.png' alt='trash_icon'></a></div></div>
+              <div id='qty_format'>Quantité<br>x".$cpt."<br><br>
+              <div id='img_trash'><a href='PanierPage.php?ID=".$data['ID']."'>
+              <img src='res/icon_trash.png' alt='trash_icon'>
+              </a></div></div>
             </td>
           </tr>
         </table>
       </div>
-    </div>";}
+    </div>";
+  }
   
     //fermer la connection
     $conn->close();
 
-    echo "</div><h2>TOTAL : ".$total_price." €</h2>
-      <div id='format_btn'>
+    echo "</div><h2>TOTAL : ".$_SESSION['total_price']." €</h2>
+      <div id='format_btn'><a href='Payement.php' style='color:white;'>
       <button type='button' class='btn btn-success'>
         Passer à la commande <br> ".$nb_article." article(s)
-      </button>
-  </div>";
+      </button></a>
+  </div>";}
   ?>
 </div>
   <script type="text/javascript">
